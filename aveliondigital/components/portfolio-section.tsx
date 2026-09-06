@@ -9,6 +9,11 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { cn } from "@/lib/utils";
 import { INK_FILL_SIZE, useInkFill } from "@/components/use-ink-fill";
 
+type ProjectMetric = {
+  value: string;
+  label: string;
+};
+
 type Project = {
   id: string;
   index: string;
@@ -17,6 +22,7 @@ type Project = {
   title: string;
   subtitle: string;
   description: string;
+  metrics?: readonly ProjectMetric[];
   tags: readonly string[];
   icon: string;
   preview: { type: "video"; src: string } | { type: "image"; src: string; alt: string };
@@ -33,8 +39,12 @@ const PROJECTS: readonly Project[] = [
     title: "TradeLens",
     subtitle: "Chart Analysis",
     description:
-      "An iOS app that turns any chart screenshot into a clear, AI-powered trading analysis. Built for traders who need institutional-grade insight in seconds.",
-    tags: ["iOS", "AI Vision", "React Native"],
+      "An iOS app that turns any chart screenshot into a clear, AI-powered trading analysis. We built it, launched it, and grew it past 35,000 downloads with our own marketing strategy.",
+    metrics: [
+      { value: "35,000+", label: "Downloads" },
+      { value: "In-house", label: "Marketing" },
+    ],
+    tags: ["iOS", "AI Vision", "React Native", "Growth"],
     icon: "/brand/tradelens-chart-analysis.png",
     preview: { type: "video", src: "/vid/mockup1.mp4" },
     primaryCta: {
@@ -402,6 +412,29 @@ function ProjectShowcase({
                   {project.description}
                 </p>
 
+                {project.metrics && project.metrics.length > 0 ? (
+                  <dl className="mt-8 flex items-stretch justify-center sm:mt-9 lg:justify-start">
+                    {project.metrics.map((metric, i) => (
+                      <div
+                        key={metric.label}
+                        className={cn(
+                          "flex min-w-0 flex-col items-center px-6 first:pl-0 last:pr-0 lg:items-start",
+                          i > 0 && "border-l border-white/12",
+                        )}
+                      >
+                        <dd
+                          className="font-playfair text-[1.85rem] font-medium leading-none tracking-[-0.03em] text-white sm:text-[2.15rem]"
+                        >
+                          {metric.value}
+                        </dd>
+                        <dt className="mt-2 font-dm-sans-hero text-[13px] font-medium text-white/45">
+                          {metric.label}
+                        </dt>
+                      </div>
+                    ))}
+                  </dl>
+                ) : null}
+
                 <ul className="mt-7 flex flex-wrap justify-center gap-2 sm:mt-8 lg:justify-start">
                   {project.tags.map((tag) => (
                     <li
@@ -524,7 +557,7 @@ export function PortfolioSection() {
           <p className="mx-auto mt-5 max-w-xl font-dm-sans-hero text-[14px] leading-[1.85] text-white/55 sm:text-[15px]">
             End-to-end digital products.
             <br />
-            Designed, built and shipped with the
+            Designed, built and grown with the
             same precision as the rest of our work.
           </p>
           <div className="mx-auto mt-6 h-px w-10 rounded-full bg-white/20" />

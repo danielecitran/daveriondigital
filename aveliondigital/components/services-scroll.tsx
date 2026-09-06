@@ -21,7 +21,7 @@ const SERVICES = [
   {
     num: "03",
     title: ["Marketing", "& Ads"],
-    body: "Marketing strategies and ad campaigns that drive traffic, generate leads and grow your revenue.",
+    body: "Marketing strategies and ad campaigns that grow revenue — the same approach that took our own app past 35,000 downloads.",
     tags: ["Paid Ads", "SEO"],
   },
   {

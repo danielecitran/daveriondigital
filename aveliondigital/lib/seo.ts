@@ -188,7 +188,7 @@ export const TRADELENS_EMAIL = "tradelens@daverion.digital";
 export const TRADELENS_TIKTOK = "https://www.tiktok.com/@tradelensapp";
 
 export const TRADELENS_DESCRIPTION =
-  "TradeLens is an iOS app by Daverion Digital for AI chart analysis. Upload a trading chart and get technical analysis, long/short signals and a complete trading plan in seconds.";
+  "TradeLens is an iOS app by Daverion Digital for AI chart analysis. Upload a trading chart and get technical analysis, long/short signals and a complete trading plan in seconds. Grown to over 35,000 downloads with an in-house marketing strategy.";
 
 export const TRADELENS_KEYWORDS = [
   "TradeLens",
@@ -386,6 +386,11 @@ export function tradelensSoftwareJsonLd() {
       "Complete trading plan with entry and stop-loss",
     ],
     sameAs: [TRADELENS_APP_STORE_URL, TRADELENS_TIKTOK],
+    interactionStatistic: {
+      "@type": "InteractionCounter",
+      interactionType: "https://schema.org/DownloadAction",
+      userInteractionCount: 35000,
+    },
   };
 }
 
@@ -445,7 +450,7 @@ export const HOME_FAQ = [
   {
     question: "What is TradeLens?",
     answer:
-      "TradeLens is an iOS app by Daverion Digital. It turns a chart screenshot into AI-powered technical analysis, clear long/short signals and a complete trading plan.",
+      "TradeLens is an iOS app by Daverion Digital. It turns a chart screenshot into AI-powered technical analysis, clear long/short signals and a complete trading plan. Daverion Digital built, launched and grew TradeLens past 35,000 downloads with an in-house marketing strategy.",
   },
 ] as const;
 
@@ -453,22 +458,22 @@ export const TRADELENS_FAQ = [
   {
     question: "What is TradeLens?",
     answer:
-      "TradeLens is an iOS trading app by Daverion Digital. Upload a chart screenshot and get AI chart analysis, technical analysis, long/short signals and a complete trading plan in seconds.",
+      "TradeLens is an iOS trading app by Daverion Digital. Upload a chart screenshot and get AI chart analysis, technical analysis, long/short signals and a complete trading plan in seconds. The app has grown to over 35,000 downloads through Daverion Digital's own in-house marketing strategy.",
   },
   {
     question: "What is the TradeLens App?",
     answer:
-      "The TradeLens App is available on the Apple App Store for iPhone. It analyzes stocks, crypto, forex and commodities with AI — including news analysis and an AI trading mentor.",
+      "The TradeLens App is available on the Apple App Store for iPhone. It analyzes stocks, crypto, forex and commodities with AI — including news analysis and an AI trading mentor. TradeLens has over 35,000 downloads.",
   },
   {
     question: "Who made TradeLens?",
     answer:
-      "TradeLens is built by Daverion Digital KLG, a Swiss tech agency founded by Daniele Citran and Erik Buser.",
+      "TradeLens is built and marketed by Daverion Digital KLG, a Swiss tech agency founded by Daniele Citran and Erik Buser. The team grew the app past 35,000 downloads with their own marketing strategy.",
   },
   {
     question: "Was ist TradeLens?",
     answer:
-      "TradeLens ist eine iOS-App von Daverion Digital für KI-Chartanalyse. Du lädst ein Chart hoch und erhältst technische Analyse, Long/Short-Signale und einen Trading-Plan in Sekunden.",
+      "TradeLens ist eine iOS-App von Daverion Digital für KI-Chartanalyse. Du lädst ein Chart hoch und erhältst technische Analyse, Long/Short-Signale und einen Trading-Plan in Sekunden. Die App hat über 35.000 Downloads — gewachsen mit einer eigenen Marketing-Strategie.",
   },
   {
     question: "Wo kann ich die TradeLens App herunterladen?",
