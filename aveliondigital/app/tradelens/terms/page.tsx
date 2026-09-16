@@ -22,7 +22,7 @@ export default function TradeLensTermsPage() {
       eyebrow="Legal"
       pageTitle="Terms and Conditions"
       provider="Provided by Daverion Digital"
-      date="Last updated: September 2, 2026"
+      date="Last updated: September 16, 2026"
     >
       <DocSection heading="1. Scope and Subject Matter">
         These Terms and Conditions govern the use of the mobile application
@@ -103,7 +103,7 @@ export default function TradeLensTermsPage() {
         <Callout variant="info" badge="Fair Use Policy">
           To ensure fair use of the service, we reserve the right to limit the
           number of chart analyses a user may perform per month to a maximum of
-          150 analyses. If this limit is exceeded, access to further analyses may
+          250 analyses. If this limit is exceeded, access to further analyses may
           be temporarily restricted.
         </Callout>
       </DocSection>
