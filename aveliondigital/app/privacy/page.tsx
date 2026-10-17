@@ -136,7 +136,47 @@ export default function PrivacyPage() {
 
         <section className={sectionClass}>
           <h2 className={headingClass}>
-            5. Disclosure of personal data and transfers abroad
+            5. Website hosting, analytics and contact form
+          </h2>
+          <div className={`${bodyClass} space-y-4`}>
+            <p>
+              Our website is hosted by Vercel Inc., 440 N Barranca Ave #4133, Covina,
+              CA 91723, USA. When you visit the website, Vercel processes the data
+              needed to deliver it and keep it secure, in particular your IP address,
+              the date and time of the request, the page requested, the referring
+              page and information about your browser and operating system.
+            </p>
+            <p>
+              To understand how the website is used and how fast it loads, we use
+              Vercel Web Analytics and Vercel Speed Insights. They record which pages
+              are viewed, the referring page, the country, the device type, the
+              browser and operating system, and loading-time measurements. They do not
+              use cookies and do not identify you: visits are counted with a short-lived
+              value derived from the request, which is discarded after 24 hours. We use
+              these statistics on the basis of our legitimate interest in a working
+              and well-performing website.
+            </p>
+            <p>
+              When you send us a message through the contact form, the details you
+              enter (first and last name, company, phone number, email address and
+              your message), together with your IP address and technical data about
+              the request, are transmitted to Formspree, Inc. (USA), which delivers
+              the message to us by email and stores it on our behalf. We use this
+              data only to answer your enquiry and keep it for as long as needed for
+              that purpose and for statutory retention periods.
+            </p>
+            <p>
+              Vercel and Formspree process this data on our behalf. Transfers to the
+              USA take place on the basis of the Swiss–U.S. and EU–U.S. Data Privacy
+              Framework where the provider is certified, and otherwise on the basis
+              of standard contractual clauses (see section 6).
+            </p>
+          </div>
+        </section>
+
+        <section className={sectionClass}>
+          <h2 className={headingClass}>
+            6. Disclosure of personal data and transfers abroad
           </h2>
           <p className={bodyClass}>
             We also disclose your personal data to third parties, in particular to
@@ -196,7 +236,7 @@ export default function PrivacyPage() {
         </section>
 
         <section className={sectionClass}>
-          <h2 className={headingClass}>6. Retention period</h2>
+          <h2 className={headingClass}>7. Retention period</h2>
           <p className={bodyClass}>
             We process your data for as long as our processing purposes, statutory
             retention periods and our legitimate interests in processing for
@@ -208,7 +248,7 @@ export default function PrivacyPage() {
         </section>
 
         <section className={sectionClass}>
-          <h2 className={headingClass}>7. Third-party offerings</h2>
+          <h2 className={headingClass}>8. Third-party offerings</h2>
           <p className={bodyClass}>
             We may also embed further third-party offerings on our website, in
             particular plug-ins from social media providers. These offerings are
@@ -222,7 +262,7 @@ export default function PrivacyPage() {
         </section>
 
         <section className={sectionClass}>
-          <h2 className={headingClass}>8. Social networks</h2>
+          <h2 className={headingClass}>9. Social networks</h2>
           <div className={`${bodyClass} space-y-4`}>
             <p>
               We may operate pages and other online presences (“fan pages”,
@@ -254,7 +294,7 @@ export default function PrivacyPage() {
         </section>
 
         <section className={sectionClass}>
-          <h2 className={headingClass}>9. Controller</h2>
+          <h2 className={headingClass}>10. Controller</h2>
           <p className={bodyClass}>
             The controller for the purposes of data protection law is:
           </p>
@@ -283,7 +323,7 @@ export default function PrivacyPage() {
         </section>
 
         <section className={sectionClass}>
-          <h2 className={headingClass}>10. Your rights</h2>
+          <h2 className={headingClass}>11. Your rights</h2>
           <p className={bodyClass}>
             You have the following rights in connection with the processing of your
             personal data:
