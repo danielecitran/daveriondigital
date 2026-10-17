@@ -187,6 +187,11 @@ export const TRADELENS_APP_STORE_URL =
 export const TRADELENS_EMAIL = "tradelens@daverion.digital";
 export const TRADELENS_TIKTOK = "https://www.tiktok.com/@tradelensapp";
 
+export const SPORTLENS_NAME = "SportLens";
+export const SPORTLENS_PATH = "/sportlens";
+export const SPORTLENS_DESCRIPTION =
+  "SportLens is an iOS sports analysis app by Daverion Digital: win chances and fair odds for every game across the NBA, NFL, NHL, MLB and top European football, with Scout, an AI betting mentor that explains every pick.";
+
 export const TRADELENS_DESCRIPTION =
   "TradeLens is an iOS app by Daverion Digital for AI chart analysis. Upload a trading chart and get technical analysis, long/short signals and a complete trading plan in seconds. Grown to over 35,000 downloads with an in-house marketing strategy.";
 
@@ -237,6 +242,9 @@ export const SITEMAP_ROUTES = [
   { path: "/tradelens", changeFrequency: "monthly" as const, priority: 0.8 },
   { path: "/tradelens/privacy", changeFrequency: "yearly" as const, priority: 0.2 },
   { path: "/tradelens/terms", changeFrequency: "yearly" as const, priority: 0.2 },
+  { path: "/sportlens", changeFrequency: "monthly" as const, priority: 0.7 },
+  { path: "/sportlens/privacy", changeFrequency: "yearly" as const, priority: 0.2 },
+  { path: "/sportlens/terms", changeFrequency: "yearly" as const, priority: 0.2 },
 ];
 
 export function absoluteUrl(path: string): string {

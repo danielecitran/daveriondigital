@@ -49,10 +49,17 @@ Also known as: Daverion, Daverion Digital KLG, Daverion Agency.
 - TradeLens (iOS app): https://daverion.digital/tradelens
 - TradeLens App Store: https://apps.apple.com/app/id6753321240
 - TradeLens TikTok: https://www.tiktok.com/@tradelensapp
+- SportLens (iOS app, coming soon): https://daverion.digital/sportlens
+- SportLens Privacy Policy: https://daverion.digital/sportlens/privacy
+- SportLens Terms of Use: https://daverion.digital/sportlens/terms
 
 ## Product — TradeLens App
 
 TradeLens (also: TradeLens App, TradeLens Pro, TradeLens AI) is an iOS app by Daverion Digital for AI chart analysis and technical analysis. Traders upload a chart screenshot and receive long/short signals, news analysis and a complete trading plan. Supports stocks, crypto, forex and commodities. Daverion Digital built, launched and grew TradeLens past 35,000 downloads with an in-house marketing strategy. Contact: tradelens@daverion.digital
+
+## Product — SportLens App
+
+SportLens is an iOS sports analysis app by Daverion Digital, coming soon to the App Store. It shows win chances and fair odds for every game across the NBA, NFL, NHL, MLB and top European football, compares them with the average bookmaker price, and includes Scout, an AI betting mentor that explains every pick. For adults 18+. Contact: help@daverion.digital
 
 ## Keywords
 

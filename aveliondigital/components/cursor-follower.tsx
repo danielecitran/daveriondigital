@@ -27,7 +27,7 @@ const CLICKABLE_SELECTOR =
 
 export function CursorFollowerHost() {
   const pathname = usePathname();
-  if (pathname.startsWith("/tradelens")) return null;
+  if (pathname.startsWith("/tradelens") || pathname.startsWith("/sportlens")) return null;
   return <CursorFollower />;
 }
 
