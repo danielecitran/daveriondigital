@@ -16,9 +16,9 @@ export function StudioFooter({ className }: { className?: string }) {
         className,
       )}
     >
-      <div className="flex flex-col-reverse gap-3 px-1 text-[13px] text-ash sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2 px-1 text-[12px] text-ash sm:text-[13px]">
         <p>© {new Date().getFullYear()} Daverion Digital KLG</p>
-        <nav aria-label="Footer" className="flex flex-wrap gap-x-5 gap-y-1">
+        <nav aria-label="Footer" className="flex flex-wrap gap-x-4 gap-y-1 sm:gap-x-5">
           {links.map((link) => (
             <Link
               key={link.href}

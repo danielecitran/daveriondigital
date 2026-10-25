@@ -10,7 +10,7 @@ export function StudioHero() {
       aria-labelledby="hero-title"
       className="relative mx-4 mb-4 flex flex-1 overflow-hidden rounded-2xl border border-white/[0.06] bg-ink-900 sm:mx-6 md:mx-8 md:rounded-[1.75rem]"
     >
-      <div className="relative grid w-full grid-cols-1 content-center justify-items-center gap-10 px-6 pb-12 pt-10 sm:gap-14 sm:px-10 sm:pb-14 sm:pt-14 lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] lg:items-center lg:gap-8 lg:px-10 xl:gap-12 xl:px-12 lg:py-16">
+      <div className="relative grid w-full grid-cols-1 content-center justify-items-center gap-8 px-6 pb-8 pt-8 sm:gap-14 sm:px-10 sm:pb-14 sm:pt-14 lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] lg:items-center lg:gap-8 lg:px-10 xl:gap-12 xl:px-12 lg:py-16">
         <div className="studio-rise w-full max-w-[34rem] lg:w-auto lg:max-w-none lg:justify-self-center">
           <h1
             id="hero-title"
@@ -29,7 +29,8 @@ export function StudioHero() {
           </h1>
         </div>
 
-        <RetroComputer className="studio-rise w-[min(66vw,19.5rem)] [animation-delay:120ms] lg:w-[clamp(17rem,24vw,25rem)]" />
+        {/* Auf dem Handy skaliert der Computer auch mit der sichtbaren Höhe, damit nichts scrollt. */}
+        <RetroComputer className="studio-rise w-[max(9.5rem,min(66vw,19.5rem,calc((100svh-22.5rem)*0.75)))] [animation-delay:120ms] lg:w-[clamp(17rem,24vw,25rem)]" />
 
         <div className="hidden lg:block" />
       </div>

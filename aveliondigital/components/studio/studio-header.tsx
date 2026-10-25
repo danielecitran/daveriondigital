@@ -30,7 +30,7 @@ export function StudioHeader() {
   const careersActive = pathname.startsWith("/careers");
 
   return (
-    <header className="relative z-40 px-4 pt-[max(1rem,env(safe-area-inset-top))] pb-4 sm:px-6 sm:pb-5 md:px-8">
+    <header className="relative z-40 px-4 pt-[max(1rem,env(safe-area-inset-top))] pb-3 sm:px-6 sm:pb-5 md:px-8">
       <nav className="relative z-[60] flex items-center justify-between gap-3" aria-label="Main">
         <Link
           href="/"
