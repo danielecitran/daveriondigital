@@ -11,6 +11,9 @@ import { useScroll } from "@/components/use-scroll";
 import { scrollToSection } from "@/lib/smooth-scroll";
 import { cn } from "@/lib/utils";
 
+/** Die alte Startseite lebt jetzt unter /legacy (siehe app/legacy/page.tsx). */
+const LEGACY_HOME = "/legacy";
+
 const navLinks = [
   { label: "About", sectionId: "about" },
   { label: "Services", sectionId: "services" },
@@ -122,7 +125,7 @@ export function Header() {
   const onNavClick = React.useCallback(
     (e: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
       setOpen(false);
-      if (pathname !== "/") return;
+      if (pathname !== LEGACY_HOME) return;
       e.preventDefault();
       scrollToSection(sectionId);
     },
@@ -157,7 +160,7 @@ export function Header() {
             aria-label="Hauptnavigation"
           >
             <Link
-              href="/"
+              href={LEGACY_HOME}
               className={cn(
                 "inline-flex shrink-0 items-center leading-none",
                 "transition-opacity hover:opacity-90",
@@ -174,7 +177,7 @@ export function Header() {
               {navLinks.map((link) => (
                 <a
                   key={link.sectionId}
-                  href={`/#${link.sectionId}`}
+                  href={`${LEGACY_HOME}#${link.sectionId}`}
                   className={linkClass}
                   data-header-link
                   onClick={(e) => onNavClick(e, link.sectionId)}
@@ -228,7 +231,7 @@ export function Header() {
             {navLinks.map((link) => (
               <a
                 key={link.sectionId}
-                href={`/#${link.sectionId}`}
+                href={`${LEGACY_HOME}#${link.sectionId}`}
                 className={cn(
                   linkClass,
                   "block rounded-xl px-4 py-3.5 text-left text-[12px] tracking-[0.18em] hover:bg-white/[0.06]",

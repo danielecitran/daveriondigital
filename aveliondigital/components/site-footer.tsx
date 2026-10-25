@@ -9,6 +9,9 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { scrollToSection } from "@/lib/smooth-scroll";
 import { cn } from "@/lib/utils";
 
+/** Die alte Startseite lebt jetzt unter /legacy (siehe app/legacy/page.tsx). */
+const LEGACY_HOME = "/legacy";
+
 const exploreLinks = [
   { label: "About", sectionId: "about" },
   { label: "Services", sectionId: "services" },
@@ -58,7 +61,7 @@ export function SiteFooter() {
     e: React.MouseEvent<HTMLAnchorElement>,
     sectionId: string,
   ) => {
-    if (pathname !== "/") return;
+    if (pathname !== LEGACY_HOME) return;
     e.preventDefault();
     scrollToSection(sectionId);
   };
@@ -87,7 +90,7 @@ export function SiteFooter() {
             <div className="max-w-[20rem] shrink-0">
               <div className="flex h-14 items-end justify-center lg:justify-start">
                 <a
-                  href="/"
+                  href={LEGACY_HOME}
                   aria-label="Back to home"
                   className="inline-flex rounded-sm transition-opacity duration-300 hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white/70"
                 >
@@ -114,7 +117,7 @@ export function SiteFooter() {
                   {exploreLinks.map((link) => (
                     <a
                       key={link.sectionId}
-                      href={`/#${link.sectionId}`}
+                      href={`${LEGACY_HOME}#${link.sectionId}`}
                       onClick={(e) => onExploreClick(e, link.sectionId)}
                       className={linkClass}
                     >

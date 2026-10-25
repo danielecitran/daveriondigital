@@ -5,10 +5,10 @@ export const SITE_NAME = "Daverion Digital";
 export const LEGAL_NAME = "Daverion Digital KLG";
 
 export const SITE_DESCRIPTION =
-  "Daverion Digital is a Swiss software development, web development and e-commerce agency. We build apps, websites and digital products for businesses worldwide.";
+  "Daverion Digital is an independent app studio from Zurich. We design, build and grow our own mobile apps that make people's lives better every day.";
 
 export const SITE_DESCRIPTION_DE =
-  "Daverion Digital KLG — Schweizer Tech-Agentur für App-Entwicklung, Webseiten-Entwicklung, E-Commerce und Software Development aus Kilchberg, Zürich.";
+  "Daverion Digital KLG ist ein unabhängiges App Studio aus Kilchberg bei Zürich. Wir entwickeln und vermarkten eigene Apps, die das Leben von Menschen jeden Tag besser machen.";
 
 export const DEFAULT_OG_IMAGE = "/android-chrome-512x512.png";
 
@@ -27,15 +27,16 @@ export const FOUNDERS = [
   { name: "Erik Buser", jobTitle: "Partner" },
 ] as const;
 
-/** Brand, people, services, location — used in metadata, schema and llms.txt. */
+/** Brand, people, apps, location — used in metadata, schema and llms.txt. */
 export const SITE_KEYWORDS = [
   // Brand
   "Daverion Digital",
   "Daverion",
   "Daverion Digital KLG",
-  "Daverion Agency",
-  "Daverion Digital Agency",
+  "Daverion Studio",
+  "Daverion App Studio",
   "daverion.digital",
+  // Apps
   "TradeLens",
   "TradeLens App",
   // People
@@ -43,102 +44,56 @@ export const SITE_KEYWORDS = [
   "Erik Buser",
   "Daniele Citran Daverion",
   "Erik Buser Daverion",
-  // English — agency types
-  "tech agency",
-  "technology agency",
-  "creative tech agency",
-  "creative agency",
-  "digital agency",
-  "software development agency",
-  "software agency",
-  "software company",
-  "web development agency",
-  "web design agency",
-  "website development",
-  "app development",
-  "app development agency",
+  // English — studio
+  "app studio",
+  "mobile app studio",
+  "independent app studio",
+  "indie app studio",
+  "app company",
+  "mobile app company",
+  "app publisher",
+  "app developer",
+  "indie app developer",
+  "consumer apps",
+  "mobile apps",
+  "iOS apps",
+  "iPhone apps",
+  "AI apps",
   "mobile app development",
   "iOS app development",
-  "ecommerce agency",
-  "ecom agency",
-  "e-commerce agency",
-  "shopify agency",
-  "marketing agency",
-  "paid ads agency",
-  "branding agency",
-  "premium creative agency",
-  "creative and tech agency",
-  "Swiss digital agency",
-  "Swiss software company",
-  "cross-platform apps",
-  "React Native",
-  "custom websites",
-  "conversion-driven websites",
-  "high-performance apps",
-  "product development",
-  "brand building",
-  "digital products",
-  "paid ads",
-  "SEO agency",
-  "UI UX design",
-  // German — agency types
-  "Tech Agentur",
-  "Technologie Agentur",
-  "Digitalagentur",
-  "Digital Agentur",
-  "Kreativagentur",
-  "Software Agentur",
-  "Softwareentwicklungsagentur",
-  "Webagentur",
-  "Webdesign Agentur",
-  "App Agentur",
-  "E-Commerce Agentur",
-  "Ecommerce Agentur",
-  "Shopify Agentur",
-  "Marketing Agentur",
-  "Online Marketing Agentur",
-  // German — services people actually type
+  "app growth",
+  "app marketing",
+  // German — studio
+  "App Studio",
+  "App-Studio",
+  "unabhängiges App Studio",
+  "App Firma",
+  "App Unternehmen",
+  "App Entwickler",
+  "Mobile Apps",
+  "iOS Apps",
+  "iPhone Apps",
+  "KI Apps",
   "App Entwicklung",
-  "Appentwicklung",
-  "App entwickeln",
-  "App entwickeln lassen",
-  "Webseiten Entwicklung",
-  "Webseite Entwicklung",
-  "Website Entwicklung",
-  "Webentwicklung",
-  "Webseite erstellen",
-  "Website erstellen lassen",
-  "Software Entwicklung",
-  "Softwareentwicklung",
-  "Online Shop erstellen",
-  "App Programmierung",
-  "Web Programmierung",
-  "Individualsoftware",
-  "Webdesign Schweiz",
-  "Webdesign Zürich",
-  "App Entwicklung Zürich",
-  "App entwickeln Zürich",
-  "Schweizer Digitalagentur",
-  "Full-Service Digitalagentur",
-  "Agentur Kilchberg",
-  "Online Shop Agentur",
-  "Performance Marketing",
-  "Paid Ads Agentur",
-  "SEO Agentur",
-  "Branding Agentur",
+  "App Marketing",
+  // Careers
+  "Daverion Digital careers",
+  "Daverion Digital Jobs",
+  "app studio jobs",
+  "Jobs App Studio Zürich",
   // Location
-  "Swiss tech agency",
-  "tech agency Switzerland",
-  "tech agency Zurich",
-  "software agency Switzerland",
-  "software agency Zurich",
-  "Agentur Schweiz",
-  "Agentur Zürich",
-  "Tech Agentur Zürich",
-  "Tech Agentur Schweiz",
+  "Swiss app studio",
+  "app studio Switzerland",
+  "app studio Zurich",
+  "Swiss app company",
+  "app developer Zurich",
+  "Schweizer App Studio",
+  "App Studio Schweiz",
+  "App Studio Zürich",
+  "App Entwickler Schweiz",
+  "App Entwickler Zürich",
   "App Entwicklung Schweiz",
-  "Webentwicklung Schweiz",
-  "Softwareentwicklung Schweiz",
+  "App Entwicklung Zürich",
   "Kilchberg",
   "Zürich",
   "Zurich",
@@ -149,32 +104,21 @@ export const SITE_KEYWORDS = [
 export const ORGANIZATION_ALTERNATE_NAMES = [
   "Daverion",
   "Daverion Digital KLG",
-  "Daverion Agency",
-  "Daverion Digital Agency",
+  "Daverion Studio",
+  "Daverion App Studio",
 ] as const;
 
 export const KNOWS_ABOUT = [
-  "Software Development",
-  "Software Entwicklung",
+  "Mobile Apps",
+  "Consumer Apps",
+  "iOS App Development",
   "App Development",
   "App Entwicklung",
-  "Mobile App Development",
-  "iOS App Development",
-  "Android App Development",
-  "Web Development",
-  "Web Design",
-  "Webseiten Entwicklung",
-  "Website Entwicklung",
-  "Webentwicklung",
-  "E-Commerce",
-  "Shopify",
-  "Online Shop",
-  "Digital Marketing",
-  "Paid Ads",
-  "Performance Marketing",
+  "Product Design",
   "UI/UX Design",
-  "Brand Building",
-  "Digital Products",
+  "App Growth",
+  "App Marketing",
+  "AI Apps",
   "TradeLens",
   "TradeLens App",
   "AI Chart Analysis",
@@ -236,6 +180,8 @@ export const TRADELENS_KEYWORDS = [
 
 export const SITEMAP_ROUTES = [
   { path: "", changeFrequency: "weekly" as const, priority: 1 },
+  { path: "/careers", changeFrequency: "monthly" as const, priority: 0.6 },
+  { path: "/contact", changeFrequency: "yearly" as const, priority: 0.6 },
   { path: "/imprint", changeFrequency: "yearly" as const, priority: 0.3 },
   { path: "/privacy", changeFrequency: "yearly" as const, priority: 0.3 },
   { path: "/terms", changeFrequency: "yearly" as const, priority: 0.3 },
@@ -255,7 +201,8 @@ export function absoluteUrl(path: string): string {
 export function organizationJsonLd() {
   return {
     "@context": "https://schema.org",
-    "@type": "ProfessionalService",
+    // App Studio mit eigenen Produkten, kein Dienstleister — daher Organization statt ProfessionalService.
+    "@type": "Organization",
     "@id": `${SITE_URL}/#organization`,
     name: SITE_NAME,
     alternateName: [...ORGANIZATION_ALTERNATE_NAMES],
@@ -269,19 +216,16 @@ export function organizationJsonLd() {
       "@type": "PostalAddress",
       ...ADDRESS,
     },
-    geo: {
-      "@type": "GeoCoordinates",
-      latitude: 47.3216,
-      longitude: 8.5453,
+    location: {
+      "@type": "Place",
+      name: "Kilchberg, Zurich",
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: 47.3216,
+        longitude: 8.5453,
+      },
     },
-    areaServed: [
-      { "@type": "Country", name: "Switzerland" },
-      { "@type": "Country", name: "Germany" },
-      { "@type": "Country", name: "Austria" },
-      { "@type": "Place", name: "Zurich" },
-      "EU",
-      "Worldwide",
-    ],
+    areaServed: "Worldwide",
     knowsLanguage: ["en", "de"],
     knowsAbout: [...KNOWS_ABOUT],
     founder: FOUNDERS.map((person) => ({
@@ -423,17 +367,22 @@ export const HOME_FAQ = [
   {
     question: "What is Daverion Digital?",
     answer:
-      "Daverion Digital KLG is a Swiss creative and technology agency based in Kilchberg, Zurich. We specialize in app development, web development, e-commerce and digital marketing for businesses that want to grow.",
+      "Daverion Digital KLG is an independent app studio from Kilchberg near Zurich, Switzerland. We build, launch and grow our own mobile apps — apps that make people's lives better every day.",
   },
   {
-    question: "What services does Daverion Digital offer?",
+    question: "Is Daverion Digital an agency?",
     answer:
-      "We offer mobile and cross-platform app development, web design and development, e-commerce solutions (including Shopify), and marketing & paid ads. Our focus is high-performance, conversion-driven digital products.",
+      "No. Daverion Digital is an app studio, not an agency. We design, build and market our own apps in-house. For partnerships, write to contact@daverion.digital.",
+  },
+  {
+    question: "Which apps has Daverion Digital made?",
+    answer:
+      "Our first app is TradeLens, an iOS app for AI chart analysis. We built, launched and grew it past 35,000 downloads with our own marketing. More apps are in the works.",
   },
   {
     question: "Where is Daverion Digital located?",
     answer:
-      "Daverion Digital KLG is headquartered at Stockenstrasse 1, 8802 Kilchberg ZH, Switzerland. We work with clients locally in Zurich and internationally.",
+      "Daverion Digital KLG is based at Stockenstrasse 1, 8802 Kilchberg ZH, Switzerland, just outside Zurich.",
   },
   {
     question: "Who founded Daverion Digital?",
@@ -441,19 +390,19 @@ export const HOME_FAQ = [
       "Daverion Digital was founded by Daniele Citran and Erik Buser, who serve as partners of Daverion Digital KLG.",
   },
   {
+    question: "Is Daverion Digital hiring?",
+    answer:
+      "There are no open roles right now. New positions are listed at daverion.digital/careers, and open applications are welcome at contact@daverion.digital.",
+  },
+  {
+    question: "Was ist Daverion Digital?",
+    answer:
+      "Daverion Digital ist ein unabhängiges App Studio aus Kilchberg bei Zürich. Statt als Agentur Aufträge umzusetzen, entwickeln und vermarkten wir eigene Apps wie TradeLens.",
+  },
+  {
     question: "Wer sind Daniele Citran und Erik Buser?",
     answer:
-      "Daniele Citran und Erik Buser sind die Partner und Gründer von Daverion Digital KLG, einer Tech-Agentur in Kilchberg bei Zürich.",
-  },
-  {
-    question: "Bietet Daverion Digital App-Entwicklung und Webseiten-Entwicklung an?",
-    answer:
-      "Ja. Daverion Digital entwickelt Apps (iOS, Android, Cross-Platform), Webseiten und E-Commerce-Shops — inklusive Shopify, Webdesign und Software Development.",
-  },
-  {
-    question: "Is Daverion Digital a software development and e-commerce agency?",
-    answer:
-      "Yes. Daverion Digital is a Swiss software development agency and e-commerce agency. We also work as a tech agency for web development, app development, branding and paid ads.",
+      "Daniele Citran und Erik Buser sind die Partner und Gründer von Daverion Digital KLG, einem App Studio in Kilchberg bei Zürich.",
   },
   {
     question: "What is TradeLens?",
@@ -476,7 +425,7 @@ export const TRADELENS_FAQ = [
   {
     question: "Who made TradeLens?",
     answer:
-      "TradeLens is built and marketed by Daverion Digital KLG, a Swiss tech agency founded by Daniele Citran and Erik Buser. The team grew the app past 35,000 downloads with their own marketing strategy.",
+      "TradeLens is built and marketed by Daverion Digital KLG, a Swiss app studio founded by Daniele Citran and Erik Buser. The team grew the app past 35,000 downloads with their own marketing strategy.",
   },
   {
     question: "Was ist TradeLens?",

@@ -1,5 +1,10 @@
 import type { Metadata, Viewport } from "next";
-import { IBM_Plex_Mono, Inter, Plus_Jakarta_Sans } from "next/font/google";
+import {
+  IBM_Plex_Mono,
+  Instrument_Serif,
+  Inter,
+  Plus_Jakarta_Sans,
+} from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { CursorFollowerHost } from "@/components/cursor-follower";
@@ -22,6 +27,7 @@ import "./globals.css";
  * – Plus Jakarta Sans: Display-Headlines (Hero, Services, Portfolio)
  * – Inter: Body, Labels, UI — klassische Sans-Paarung zu Plus Jakarta Sans
  * – IBM Plex Mono: Monospace für Code/technische Akzente
+ * – Instrument Serif: Display-Serif des Studio-Designs (Startseite, Careers, Contact)
  */
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -37,6 +43,14 @@ const inter = Inter({
   display: "swap",
 });
 
+const instrumentSerif = Instrument_Serif({
+  subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
+  variable: "--font-instrument-serif",
+  display: "swap",
+});
+
 const ibmPlexMono = IBM_Plex_Mono({
   subsets: ["latin"],
   weight: ["400", "500"],
@@ -48,13 +62,13 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  themeColor: "#050508",
+  themeColor: "#0a0a0b",
 };
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: `${SITE_NAME} | Software Development & E-Commerce Agency`,
+    default: SITE_NAME,
     template: `%s | ${SITE_NAME}`,
   },
   description: SITE_DESCRIPTION,
@@ -84,20 +98,20 @@ export const metadata: Metadata = {
     alternateLocale: ["de_CH", "en_US"],
     url: SITE_URL,
     siteName: SITE_NAME,
-    title: `${SITE_NAME} | Software Development & E-Commerce Agency`,
+    title: SITE_NAME,
     description: SITE_DESCRIPTION,
     images: [
       {
         url: DEFAULT_OG_IMAGE,
         width: 512,
         height: 512,
-        alt: `${SITE_NAME} — Swiss Tech Agency`,
+        alt: `${SITE_NAME} — Swiss App Studio`,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE_NAME} | Software Development & E-Commerce Agency`,
+    title: SITE_NAME,
     description: SITE_DESCRIPTION,
     images: [DEFAULT_OG_IMAGE],
   },
@@ -122,7 +136,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${plusJakartaSans.variable} ${inter.variable} ${ibmPlexMono.variable} h-full antialiased`}
+      className={`${plusJakartaSans.variable} ${inter.variable} ${instrumentSerif.variable} ${ibmPlexMono.variable} h-full antialiased`}
     >
       <body className="min-h-full">
         <StructuredData

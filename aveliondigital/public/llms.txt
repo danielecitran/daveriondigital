@@ -1,48 +1,58 @@
 # Daverion Digital
 
-> Swiss creative and technology agency (Daverion Digital KLG) specializing in app development, web development, e-commerce and digital marketing.
+> Independent Swiss app studio (Daverion Digital KLG). We build and grow our own mobile apps — apps that make people's lives better every day.
 
-Daverion Digital is a tech agency, software development agency and e-commerce agency. We build high-performance apps, conversion-driven websites and e-commerce solutions for businesses worldwide. Based in Kilchberg, Zurich, Switzerland.
+Daverion Digital is an app studio, not an agency. We design, build, launch and market our own apps in-house, like TradeLens and SportLens. Based in Kilchberg near Zurich, Switzerland.
 
-Also known as: Daverion, Daverion Digital KLG, Daverion Agency.
+Also known as: Daverion, Daverion Digital KLG, Daverion Studio, Daverion App Studio.
 
 ## Company
 
 - Legal name: Daverion Digital KLG
+- Type: independent app studio
 - Website: https://daverion.digital
 - Email: contact@daverion.digital
 - Address: Stockenstrasse 1, 8802 Kilchberg ZH, Switzerland
 - UID: CHE-223.160.667
 - Founders / Partners: Daniele Citran, Erik Buser
 - Languages: English, German
-- Service area: Switzerland, Germany, Austria, EU, worldwide
 
 ## People
 
 - Daniele Citran — Partner, Daverion Digital KLG, Kilchberg / Zurich
 - Erik Buser — Partner, Daverion Digital KLG, Kilchberg / Zurich
 
-## Services (EN)
+## What we do (EN)
 
-- App Development (iOS, Android, cross-platform, mobile apps)
-- Web Design & Web Development (websites, landing pages)
-- E-Commerce (Shopify, custom shops, ecom)
-- Marketing & Paid Ads
-- Software Development
-- Brand Building & Digital Products
+- Build our own consumer mobile apps (iOS first)
+- Product design and engineering in-house
+- App growth and marketing in-house
 
-## Services (DE)
+## Was wir machen (DE)
 
-- App-Entwicklung / App entwickeln lassen
-- Webseiten-Entwicklung / Website erstellen / Webentwicklung
-- Software-Entwicklung
-- E-Commerce / Online Shop / Shopify
-- Marketing & Paid Ads
-- Branding & digitale Produkte
+- Eigene Apps für Konsumenten entwickeln (zuerst iOS)
+- Produktdesign und Entwicklung im eigenen Team
+- Wachstum und Marketing unserer Apps im eigenen Team
+
+## Apps
+
+### TradeLens
+
+TradeLens (also: TradeLens App, TradeLens Pro, TradeLens AI) is an iOS app by Daverion Digital for AI chart analysis and technical analysis. Traders upload a chart screenshot and receive long/short signals, news analysis and a complete trading plan. Supports stocks, crypto, forex and commodities. Daverion Digital built, launched and grew TradeLens past 35,000 downloads with an in-house marketing strategy. Contact: tradelens@daverion.digital
+
+### SportLens
+
+SportLens is an iOS sports analysis app by Daverion Digital, coming soon to the App Store. It shows win chances and fair odds for every game across the NBA, NFL, NHL, MLB and top European football, compares them with the average bookmaker price, and includes Scout, an AI betting mentor that explains every pick. For adults 18+. Contact: help@daverion.digital
+
+## Careers
+
+No open roles right now. New positions are listed at https://daverion.digital/careers. Open applications: contact@daverion.digital
 
 ## Key pages
 
 - Homepage: https://daverion.digital/
+- Careers: https://daverion.digital/careers
+- Contact: https://daverion.digital/contact
 - Imprint: https://daverion.digital/imprint
 - Privacy: https://daverion.digital/privacy
 - Terms: https://daverion.digital/terms
@@ -53,14 +63,6 @@ Also known as: Daverion, Daverion Digital KLG, Daverion Agency.
 - SportLens Privacy Policy: https://daverion.digital/sportlens/privacy
 - SportLens Terms of Use: https://daverion.digital/sportlens/terms
 
-## Product — TradeLens App
-
-TradeLens (also: TradeLens App, TradeLens Pro, TradeLens AI) is an iOS app by Daverion Digital for AI chart analysis and technical analysis. Traders upload a chart screenshot and receive long/short signals, news analysis and a complete trading plan. Supports stocks, crypto, forex and commodities. Daverion Digital built, launched and grew TradeLens past 35,000 downloads with an in-house marketing strategy. Contact: tradelens@daverion.digital
-
-## Product — SportLens App
-
-SportLens is an iOS sports analysis app by Daverion Digital, coming soon to the App Store. It shows win chances and fair odds for every game across the NBA, NFL, NHL, MLB and top European football, compares them with the average bookmaker price, and includes Scout, an AI betting mentor that explains every pick. For adults 18+. Contact: help@daverion.digital
-
 ## Keywords
 
-Daverion Digital, Daverion, Daverion Digital KLG, Daverion Agency, daverion.digital, Daniele Citran, Erik Buser, tech agency, technology agency, creative tech agency, digital agency, software development agency, software agency, web development agency, web design agency, app development agency, ecommerce agency, ecom agency, e-commerce agency, shopify agency, marketing agency, Swiss tech agency, tech agency Zurich, Tech Agentur, Digitalagentur, Software Agentur, Webagentur, App Agentur, E-Commerce Agentur, Shopify Agentur, App Entwicklung, Appentwicklung, Webseiten Entwicklung, Website Entwicklung, Webentwicklung, Software Entwicklung, Softwareentwicklung, App Entwicklung Schweiz, Webentwicklung Schweiz, Agentur Zürich, Agentur Schweiz, Kilchberg, Zürich, Switzerland, TradeLens, TradeLens App, TradeLens iOS, TradeLens Pro, TradeLens AI, AI chart analysis app, Chart Analyse App, Technische Analyse App, Trading App iOS
+Daverion Digital, Daverion, Daverion Digital KLG, Daverion Studio, Daverion App Studio, daverion.digital, Daniele Citran, Erik Buser, app studio, independent app studio, indie app studio, mobile app studio, app company, app publisher, consumer apps, iOS apps, AI apps, app growth, Swiss app studio, app studio Zurich, app studio Switzerland, App Studio, Schweizer App Studio, App Studio Zürich, App Entwickler Schweiz, App Entwicklung Zürich, Kilchberg, Zürich, Switzerland, TradeLens, TradeLens App, TradeLens iOS, TradeLens Pro, TradeLens AI, AI chart analysis app, Chart Analyse App, Technische Analyse App, Trading App iOS, SportLens, SportLens App, SportLens iOS

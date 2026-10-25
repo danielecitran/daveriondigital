@@ -1,0 +1,92 @@
+/*
+ * Wortmarke ohne Lade-Animation: steht ab dem ersten Paint still da.
+ * Der bekannte RGB-Glitch (cyan/rosa versetzt) läuft nur einmal beim Hover.
+ */
+
+.logo {
+  position: relative;
+  display: block;
+  height: 1.75rem;
+  aspect-ratio: 5 / 1;
+}
+
+@media (min-width: 640px) {
+  .logo {
+    height: 2rem;
+  }
+}
+
+.base,
+.ghost {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.base {
+  z-index: 2;
+  object-fit: contain;
+}
+
+.ghost {
+  z-index: 1;
+  opacity: 0;
+  mix-blend-mode: plus-lighter;
+  -webkit-mask: url("/brand/aveliondigital_header.svg") center / contain no-repeat;
+  mask: url("/brand/aveliondigital_header.svg") center / contain no-repeat;
+}
+
+.cyan {
+  background: #5ee7ff;
+}
+
+.rose {
+  background: #fda4e3;
+}
+
+@keyframes glitch-cyan {
+  0% {
+    opacity: 0;
+    transform: none;
+  }
+  30% {
+    opacity: 0.7;
+    transform: translate(2.5px, 0.4px) skewX(0.7deg);
+  }
+  100% {
+    opacity: 0;
+    transform: none;
+  }
+}
+
+@keyframes glitch-rose {
+  0% {
+    opacity: 0;
+    transform: none;
+  }
+  30% {
+    opacity: 0.65;
+    transform: translate(-2.8px, -0.3px) skewX(-0.6deg);
+  }
+  100% {
+    opacity: 0;
+    transform: none;
+  }
+}
+
+a:hover .cyan,
+a:focus-visible .cyan {
+  animation: glitch-cyan 0.55s ease-out;
+}
+
+a:hover .rose,
+a:focus-visible .rose {
+  animation: glitch-rose 0.55s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ghost {
+    animation: none !important;
+  }
+}

@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 };
 
 const headingClass =
-  "font-playfair text-[1.35rem] leading-snug tracking-[-0.02em] text-white sm:text-[1.5rem]";
+  "font-serif text-[1.6rem] leading-snug text-bone sm:text-[1.8rem]";
 const bodyClass = "font-dm-sans-hero mt-4 text-[15px] leading-[1.85] text-white/55";
 const sectionClass = "border-t border-white/10 pt-10";
 

@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 };
 
 const headingClass =
-  "font-playfair text-[1.35rem] leading-snug tracking-[-0.02em] text-white sm:text-[1.5rem]";
+  "font-serif text-[1.6rem] leading-snug text-bone sm:text-[1.8rem]";
 const bodyClass = "font-dm-sans-hero mt-4 text-[15px] leading-[1.85] text-white/55";
 const sectionClass = "border-t border-white/10 pt-10";
 const listClass = `${bodyClass} list-disc space-y-2 pl-5`;
@@ -158,7 +158,7 @@ export default function PrivacyPage() {
             </p>
             <p>
               When you send us a message through the contact form, the details you
-              enter (first and last name, company, phone number, email address and
+              enter (such as your name, email address, the topic you choose and
               your message), together with your IP address and technical data about
               the request, are transmitted to Formspree, Inc. (USA), which delivers
               the message to us by email and stores it on our behalf. We use this

@@ -27,7 +27,8 @@ const CLICKABLE_SELECTOR =
 
 export function CursorFollowerHost() {
   const pathname = usePathname();
-  if (pathname.startsWith("/tradelens") || pathname.startsWith("/sportlens")) return null;
+  // Nur noch auf der archivierten Agentur-Seite; Studio-Design, TradeLens und SportLens nutzen den nativen Cursor.
+  if (!pathname.startsWith("/legacy")) return null;
   return <CursorFollower />;
 }
 
