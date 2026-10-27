@@ -2,1047 +2,564 @@
 
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
-import { useEffect, useState, type MouseEvent, type ReactNode } from "react";
+import { type ReactNode } from "react";
 
 import { S } from "@/components/sportlens/sportlens-copy";
-import {
-  SPORTLENS_ACCENT,
-  SUPPORT_EMAIL,
-  SportLensWordmark,
-} from "@/components/sportlens/sportlens-legal";
-import {
-  FadeUp,
-  TradeLensMotionLiteContext,
-  scrollToTradeLensSection,
-  useTradeLensMotionLite,
-  useTradeLensMotionLiteFlag,
-} from "@/components/tradelens/tradelens-motion";
+import { SPORTLENS_ACCENT, SUPPORT_EMAIL, SportLensWordmark } from "@/components/sportlens/sportlens-legal";
 
 // Not on the App Store yet: swap in the listing URL at launch.
 const APP_STORE_URL = "#";
 
+const GREEN = "#34D399";
+const MEDIA = "/sportlens";
+
+/* ---------- small building blocks ---------- */
+
+/** Fades a block up once it scrolls into view; still for people who prefer less motion. */
+function Reveal({ children, delay = 0, className }: { children: ReactNode; delay?: number; className?: string }) {
+  const reduce = useReducedMotion();
+  return (
+    <motion.div
+      className={className}
+      initial={reduce ? false : { opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-80px" }}
+      transition={{ duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+function Eyebrow({ children }: { children: ReactNode }) {
+  return (
+    <p className="mb-4 font-mono text-[11px] font-medium uppercase tracking-[0.22em]" style={{ color: SPORTLENS_ACCENT }}>
+      {children}
+    </p>
+  );
+}
+
 function AppStoreBadge({ large = false }: { large?: boolean }) {
   const t = S.appStore;
-  const lite = useTradeLensMotionLite();
   return (
-    <motion.a
+    <a
       href={APP_STORE_URL}
       onClick={(e) => {
         if (APP_STORE_URL === "#") e.preventDefault();
       }}
       aria-label="Download SportLens on the App Store"
-      whileHover={
-        lite
-          ? undefined
-          : { scale: 1.03, boxShadow: "0 0 28px rgba(59,130,246,0.45)" }
-      }
-      whileTap={lite ? { scale: 0.98 } : { scale: 0.97 }}
-      style={{
-        display: "inline-flex",
-        alignItems: "center",
-        gap: large ? 14 : 11,
-        background: "#ffffff",
-        borderRadius: 13,
-        padding: large ? "13px 28px" : "10px 20px",
-        textDecoration: "none",
-        color: "#000",
-        boxShadow: "0 4px 24px rgba(0,0,0,0.35)",
-        cursor: "pointer",
-        flexShrink: 0,
-      }}
+      className={`inline-flex shrink-0 items-center gap-3 rounded-[14px] bg-white text-black shadow-[0_8px_30px_rgba(0,0,0,0.4)] transition-transform hover:-translate-y-0.5 active:translate-y-0 ${
+        large ? "px-7 py-3.5" : "px-5 py-2.5"
+      }`}
     >
-      <svg
-        viewBox="0 0 24 24"
-        width={large ? 26 : 21}
-        height={large ? 32 : 26}
-        fill="#000"
-      >
+      <svg viewBox="0 0 24 24" width={large ? 26 : 21} height={large ? 32 : 26} fill="#000" aria-hidden>
         <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
       </svg>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          lineHeight: 1.15,
-          alignItems: "flex-start",
-        }}
-      >
-        <span
-          style={{
-            fontSize: large ? 11 : 10,
-            fontWeight: 400,
-            opacity: 0.65,
-            letterSpacing: "0.05em",
-          }}
-        >
-          {t.line1}
+      <span className="flex flex-col items-start leading-[1.15]">
+        <span className={`${large ? "text-[11px]" : "text-[10px]"} tracking-[0.05em] opacity-65`}>
+          {APP_STORE_URL === "#" ? t.soonLine1 : t.line1}
         </span>
-        <span
-          style={{
-            fontSize: large ? 21 : 18,
-            fontWeight: 700,
-            letterSpacing: "-0.025em",
-          }}
-        >
-          {t.line2}
-        </span>
-      </div>
-    </motion.a>
+        <span className={`${large ? "text-[21px]" : "text-[18px]"} font-bold tracking-[-0.025em]`}>{t.line2}</span>
+      </span>
+    </a>
   );
 }
 
-const FEATURE_ICONS = [
-  <svg key="percent" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
-    <line x1="19" y1="5" x2="5" y2="19" />
-    <circle cx="6.5" cy="6.5" r="2.5" />
-    <circle cx="17.5" cy="17.5" r="2.5" />
-  </svg>,
-  <svg key="scale" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
-    <path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z" />
-    <path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z" />
-    <path d="M7 21h10" />
-    <path d="M12 3v18" />
-    <path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2" />
-  </svg>,
-  <svg key="target" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="12" cy="12" r="10" />
-    <circle cx="12" cy="12" r="6" />
-    <circle cx="12" cy="12" r="2" />
-  </svg>,
-  <svg key="activity" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
-  </svg>,
-  <svg key="chat" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-  </svg>,
-  <svg key="globe" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="12" cy="12" r="10" />
-    <line x1="2" y1="12" x2="22" y2="12" />
-    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-  </svg>,
-];
-
-const navLink =
-  "hidden md:inline-flex items-center text-[#b6b6b6] hover:text-white text-sm font-medium px-3.5 py-2 rounded-lg transition-colors duration-200";
-
-function SLNav() {
-  const t = S.nav;
-  const [scrolled, setScrolled] = useState(false);
-  const lite = useTradeLensMotionLite();
-  const prefersReducedMotion = useReducedMotion();
-
-  const handleInPageAnchor = (
-    e: MouseEvent<HTMLAnchorElement>,
-    sectionId: string,
-  ) => {
-    e.preventDefault();
-    const behavior: ScrollBehavior = prefersReducedMotion ? "auto" : "smooth";
-    scrollToTradeLensSection(sectionId, behavior);
-    window.history.replaceState(null, "", `#${sectionId}`);
-  };
-
-  useEffect(() => {
-    const handler = () => setScrolled(window.scrollY > 24);
-    window.addEventListener("scroll", handler, { passive: true });
-    return () => window.removeEventListener("scroll", handler);
-  }, []);
-
+/** One of the app's screen recordings, already framed in its phone. */
+function PhoneVideo({ src, poster, className }: { src: string; poster: string; className?: string }) {
   return (
-    <header
-      style={{
-        position: "sticky",
-        top: 0,
-        zIndex: 50,
-        ...(lite
-          ? {}
-          : {
-              backdropFilter: "blur(20px)",
-              WebkitBackdropFilter: "blur(20px)",
-            }),
-        background: lite
-          ? scrolled
-            ? "rgba(1,1,1,0.98)"
-            : "rgba(1,1,1,0.96)"
-          : scrolled
-            ? "rgba(1,1,1,0.92)"
-            : "rgba(1,1,1,0.55)",
-        borderBottom: `1px solid ${scrolled ? "rgba(255,255,255,0.08)" : "transparent"}`,
-        transition: "background 0.35s ease, border-color 0.35s ease",
-      }}
-    >
-      <div
-        style={{
-          maxWidth: 1200,
-          margin: "0 auto",
-          padding: "0 24px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          height: 72,
-        }}
-      >
-        <Link
-          href="/sportlens"
-          style={{ textDecoration: "none", lineHeight: 1 }}
-          aria-label={t.ariaHome}
-        >
+    <video
+      className={className}
+      src={src}
+      poster={poster}
+      autoPlay
+      muted
+      loop
+      playsInline
+      preload="metadata"
+      aria-hidden
+    />
+  );
+}
+
+/* ---------- sections ---------- */
+
+function Nav() {
+  const t = S.nav;
+  const links = [
+    { href: "#picks", label: t.picks },
+    { href: "#scout", label: t.scout },
+    { href: "#sports", label: t.sports },
+    { href: "#play-safe", label: t.responsible },
+  ];
+  return (
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-white/[0.06] bg-[#010101]/75 backdrop-blur-xl">
+      <nav aria-label={t.ariaLabel} className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
+        <Link href="/sportlens" aria-label={t.ariaHome}>
           <SportLensWordmark size={20} />
         </Link>
-
-        <nav
-          style={{ display: "flex", alignItems: "center", gap: 4 }}
-          aria-label={t.ariaLabel}
-        >
-          <a
-            href="#how-it-works"
-            onClick={(e) => handleInPageAnchor(e, "how-it-works")}
-            className={navLink}
-          >
-            {t.howItWorks}
-          </a>
-          <a
-            href="#features"
-            onClick={(e) => handleInPageAnchor(e, "features")}
-            className={navLink}
-          >
-            {t.features}
-          </a>
-        </nav>
-      </div>
+        <div className="hidden items-center gap-8 md:flex">
+          {links.map((l) => (
+            <a key={l.href} href={l.href} className="text-sm text-white/60 transition-colors hover:text-white">
+              {l.label}
+            </a>
+          ))}
+        </div>
+        <div className="hidden sm:block">
+          <AppStoreBadge />
+        </div>
+      </nav>
     </header>
   );
 }
 
-function SLHero() {
+function Hero() {
   const t = S.hero;
-  const lite = useTradeLensMotionLite();
-
   return (
-    <section
-      className="flex min-h-[calc(100svh-72px)] items-center justify-center"
-      style={{
-        position: "relative",
-        overflow: "hidden",
-        padding: "64px 24px",
-        textAlign: "center",
-      }}
-    >
-      {lite ? (
-        <div
-          style={{
-            position: "absolute",
-            top: "40%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            width: "min(100vw, 800px)",
-            height: 480,
-            borderRadius: "50%",
-            background:
-              "radial-gradient(ellipse at center, rgba(59,130,246,0.14) 0%, rgba(99,102,241,0.06) 45%, transparent 72%)",
-            pointerEvents: "none",
-            zIndex: 0,
-          }}
-        />
-      ) : (
-        <>
-          <motion.div
-            animate={{ y: [0, -22, 0] }}
-            transition={{ duration: 7, ease: "easeInOut", repeat: Infinity }}
-            style={{
-              position: "absolute",
-              top: "40%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              width: 800,
-              height: 600,
-              borderRadius: "50%",
-              background:
-                "radial-gradient(ellipse at center, rgba(59,130,246,0.18) 0%, rgba(99,102,241,0.09) 35%, transparent 70%)",
-              filter: "blur(60px)",
-              pointerEvents: "none",
-              zIndex: 0,
-            }}
-          />
-          <motion.div
-            animate={{ y: [0, 16, 0] }}
-            transition={{ duration: 9, ease: "easeInOut", repeat: Infinity, delay: 1.5 }}
-            style={{
-              position: "absolute",
-              top: "62%",
-              left: "8%",
-              width: 320,
-              height: 320,
-              borderRadius: "50%",
-              background: "radial-gradient(circle, rgba(52,211,153,0.08) 0%, transparent 70%)",
-              filter: "blur(40px)",
-              pointerEvents: "none",
-              zIndex: 0,
-            }}
-          />
-        </>
-      )}
-
-      <div style={{ position: "relative", zIndex: 1, width: "100%", maxWidth: 960, margin: "0 auto" }}>
-        <FadeUp>
-          <h1
-            style={{
-              // Scales with the screen so the second line never wraps.
-              fontSize: "clamp(24px, 6.6vw, 70px)",
-              fontWeight: 800,
-              letterSpacing: "-0.05em",
-              lineHeight: 1.02,
-              color: "#ffffff",
-              margin: "0 0 24px",
-            }}
-          >
+    <section className="relative overflow-hidden pt-28 sm:pt-32">
+      {/* The onboarding's stadium, far in the background and fading into black. */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-y-0 left-0 w-full opacity-[0.16] md:w-[58%]"
+        style={{
+          backgroundImage: `url(${MEDIA}/stadium.jpg)`,
+          backgroundSize: "cover",
+          backgroundPosition: "center 20%",
+          maskImage: "linear-gradient(to right, black 20%, transparent 92%)",
+          WebkitMaskImage: "linear-gradient(to right, black 20%, transparent 92%)",
+        }}
+      />
+      <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-5 pb-16 md:grid-cols-[1.25fr_0.75fr] md:pb-24">
+        <Reveal>
+          <h1 className="font-heading text-[44px] font-extrabold leading-[1.02] tracking-[-0.045em] text-white sm:text-6xl lg:text-[68px]">
             {t.headlineL1}
             <br />
-            <span style={{ whiteSpace: "nowrap" }}>
-              {t.headlineL2}{" "}
-              <span style={{ color: SPORTLENS_ACCENT }}>{t.headlineAccent}</span>
-            </span>
+            <span style={{ color: SPORTLENS_ACCENT }}>{t.headlineL2}</span>
           </h1>
-        </FadeUp>
-
-        <FadeUp delay={0.1}>
-          <p
-            style={{
-              fontSize: "clamp(16px, 2vw, 20px)",
-              fontWeight: 400,
-              lineHeight: 1.7,
-              color: "#b6b6b6",
-              maxWidth: 620,
-              margin: "0 auto 44px",
-            }}
-          >
-            {t.sub}
-          </p>
-        </FadeUp>
-
-        <FadeUp delay={0.2}>
-          <div style={{ display: "flex", justifyContent: "center" }}>
-            <div className="md:hidden">
-              <AppStoreBadge />
-            </div>
-            <div className="hidden md:block">
-              <AppStoreBadge large />
-            </div>
+          <p className="mt-6 max-w-[520px] text-[17px] leading-relaxed text-white/60">{t.sub}</p>
+          <div className="mt-9">
+            <AppStoreBadge large />
           </div>
-        </FadeUp>
+        </Reveal>
+        <Reveal delay={0.15} className="relative mx-auto w-full max-w-[380px]">
+          <PhoneVideo
+            src={`${MEDIA}/showcase.mp4`}
+            poster={`${MEDIA}/showcase-poster.jpg`}
+            className="relative w-full"
+          />
+        </Reveal>
       </div>
     </section>
   );
 }
 
-function SLHowItWorks() {
-  const t = S.howItWorks;
+/** The paywall's morphing balls, as a wide band with the sports running across it. */
+function SportsBand() {
+  const t = S.sportsBand;
+  const reduce = useReducedMotion();
+  const row = [...t.sports, ...t.sports, ...t.sports];
   return (
-    <section id="how-it-works" style={{ padding: "100px 24px" }}>
-      <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-        <FadeUp className="mb-16 text-center">
-          <span
-            style={{
-              display: "inline-block",
-              fontSize: 12,
-              fontWeight: 700,
-              color: SPORTLENS_ACCENT,
-              letterSpacing: "0.12em",
-              textTransform: "uppercase",
-              marginBottom: 16,
-            }}
+    <section id="sports" className="relative isolate overflow-hidden border-y border-white/[0.06]">
+      <video
+        className="absolute left-1/2 top-1/2 -z-10 h-[125%] w-auto max-w-none -translate-x-1/2 -translate-y-1/2 opacity-60"
+        src={`${MEDIA}/sports-loop.mp4`}
+        autoPlay
+        muted
+        loop
+        playsInline
+        aria-hidden
+      />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-[#010101] via-transparent to-[#010101]" />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#010101] via-transparent to-[#010101]" />
+      {/* Outlined words: a ring around the filled letters' silhouette, so the font's
+          overlapping strokes never show as seams the way a text-stroke does. */}
+      <svg width="0" height="0" aria-hidden className="absolute">
+        <filter id="sl-outline">
+          <feMorphology in="SourceAlpha" operator="dilate" radius="1.2" result="grown" />
+          <feComposite in="grown" in2="SourceAlpha" operator="out" result="ring" />
+          <feFlood floodColor="rgba(255,255,255,0.6)" />
+          <feComposite in2="ring" operator="in" />
+        </filter>
+      </svg>
+      <div className="py-24 sm:py-32">
+        <p className="mb-8 text-center font-mono text-[11px] uppercase tracking-[0.22em] text-white/55">{t.label}</p>
+        <div className="flex overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)]">
+          <motion.div
+            className="flex shrink-0 gap-12 pr-12"
+            animate={reduce ? undefined : { x: ["0%", "-33.333%"] }}
+            transition={{ duration: 28, ease: "linear", repeat: Infinity }}
           >
-            {t.eyebrow}
-          </span>
-          <h2
-            style={{
-              fontSize: "clamp(28px, 4vw, 48px)",
-              fontWeight: 800,
-              letterSpacing: "-0.04em",
-              color: "#ffffff",
-              margin: 0,
-            }}
-          >
-            {t.heading}
-          </h2>
-        </FadeUp>
-        <div style={{ maxWidth: 920, margin: "0 auto" }}>
-          {t.steps.map((step, i) => (
-            <FadeUp key={step.title} delay={i * 0.08}>
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "84px 1fr",
-                  gap: 18,
-                  alignItems: "start",
-                  padding: i === t.steps.length - 1 ? "10px 0" : "10px 0 36px",
-                }}
+            {row.map((sport, i) => (
+              <span
+                key={`${sport}-${i}`}
+                className="font-heading text-5xl font-extrabold tracking-[-0.04em] text-white sm:text-7xl"
+                style={i % 2 ? { filter: "url(#sl-outline)" } : undefined}
               >
-                <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }} aria-hidden>
-                  <div
-                    style={{
-                      width: 52,
-                      height: 52,
-                      borderRadius: 9999,
-                      display: "grid",
-                      placeItems: "center",
-                      background:
-                        "radial-gradient(circle at 30% 30%, rgba(96,165,250,0.20), rgba(59,130,246,0.07) 55%, rgba(0,0,0,0) 72%)",
-                      boxShadow: "0 0 30px rgba(59,130,246,0.14), inset 0 1px 0 rgba(255,255,255,0.06)",
-                    }}
-                  >
-                    <span style={{ fontSize: 13, fontWeight: 800, letterSpacing: "0.12em", color: "#93c5fd" }}>
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                  </div>
-                  {i !== t.steps.length - 1 ? (
-                    <div
-                      style={{
-                        width: 2,
-                        flex: 1,
-                        marginTop: 10,
-                        background:
-                          "linear-gradient(180deg, rgba(59,130,246,0.32) 0%, rgba(255,255,255,0.08) 60%, rgba(255,255,255,0) 100%)",
-                        minHeight: 44,
-                      }}
-                    />
-                  ) : null}
-                </div>
-                <div>
-                  <h3
-                    style={{
-                      fontSize: 22,
-                      fontWeight: 800,
-                      color: "#ffffff",
-                      letterSpacing: "-0.04em",
-                      margin: "2px 0 10px",
-                    }}
-                  >
-                    {step.title}
-                  </h3>
-                  <p style={{ fontSize: 15, lineHeight: 1.7, color: "#b6b6b6", margin: 0, maxWidth: 640 }}>
-                    {step.description}
-                  </p>
-                </div>
-              </div>
-            </FadeUp>
+                {sport}
+              </span>
+            ))}
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/** A pick card drawn the way the app draws it. */
+function PickCard() {
+  return (
+    <div
+      className="rounded-[22px] p-px"
+      style={{
+        background:
+          "linear-gradient(135deg, rgba(255,255,255,0.24), rgba(255,255,255,0.08) 45%, rgba(255,255,255,0.08) 55%, rgba(255,255,255,0.24))",
+      }}
+    >
+      <div className="relative overflow-hidden rounded-[21px] bg-[#0b0b0b] px-5 pb-5 pt-4">
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-white/[0.06] to-transparent" />
+        <div className="relative flex items-center justify-between">
+          <span className="text-[11px] font-bold uppercase tracking-[0.06em] text-white/45">Points</span>
+          <span className="flex h-6 w-6 items-center justify-center rounded-full border-[1.5px]" style={{ borderColor: GREEN }}>
+            <svg viewBox="0 0 24 24" width="12" height="12" fill={GREEN} aria-hidden>
+              <path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z" />
+            </svg>
+          </span>
+        </div>
+        <div className="relative mt-3 flex items-start gap-3">
+          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/[0.08] text-sm font-bold text-white/80">
+            WC
+          </span>
+          <div className="min-w-0 flex-1">
+            <p className="font-heading text-xl font-extrabold tracking-[-0.02em] text-white">Carter O 9.5 pts</p>
+            <p className="text-xs text-white/45">Magic vs Hawks</p>
+          </div>
+          <div className="text-right">
+            <p className="font-heading text-2xl font-extrabold tracking-[-0.02em] text-white">1.77</p>
+            <p className="text-[11px] font-semibold text-white/55">Avg. odds</p>
+          </div>
+        </div>
+        <div className="relative mt-4 grid grid-cols-3 rounded-2xl border border-white/[0.06] bg-white/[0.03] px-3 py-2.5">
+          {[
+            { k: "Edge", v: "+11%", c: GREEN },
+            { k: "Stake", v: "1u", c: "#fff" },
+            { k: "Confidence", v: "80", c: "#fff" },
+          ].map((m, i) => (
+            <div key={m.k} className={i ? "border-l border-white/[0.06] pl-3" : ""}>
+              <p className="text-[10px] font-bold uppercase tracking-[0.06em] text-white/45">{m.k}</p>
+              <p className="mt-0.5 font-heading text-lg font-extrabold" style={{ color: m.c }}>
+                {m.v}
+              </p>
+            </div>
           ))}
         </div>
-      </div>
-    </section>
-  );
-}
-
-function SLFeatures() {
-  const t = S.features;
-  return (
-    <section id="features" style={{ padding: "100px 24px", background: "#0a0a0a" }}>
-      <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-        <FadeUp className="mb-4 text-center">
-          <span
-            style={{
-              display: "inline-block",
-              fontSize: 12,
-              fontWeight: 700,
-              color: SPORTLENS_ACCENT,
-              letterSpacing: "0.12em",
-              textTransform: "uppercase",
-              marginBottom: 16,
-            }}
-          >
-            {t.eyebrow}
-          </span>
-          <h2
-            style={{
-              fontSize: "clamp(28px, 4vw, 48px)",
-              fontWeight: 800,
-              letterSpacing: "-0.04em",
-              color: "#ffffff",
-              margin: "0 0 16px",
-            }}
-          >
-            {t.heading}
-          </h2>
-          <p style={{ fontSize: 18, color: "#b6b6b6", maxWidth: 540, margin: "0 auto 60px" }}>
-            {t.subtitle}
-          </p>
-        </FadeUp>
-        <div style={{ maxWidth: 980, margin: "0 auto" }}>
-          <div className="grid grid-cols-1 gap-x-14 gap-y-10 md:grid-cols-2">
-            {t.items.map((feat, i) => (
-              <FadeUp key={feat.title} delay={i * 0.06}>
-                <div style={{ display: "grid", gridTemplateColumns: "40px 1fr", gap: 16, alignItems: "flex-start" }}>
-                  <div aria-hidden style={{ paddingTop: 2 }}>
-                    <div
-                      style={{
-                        width: 34,
-                        height: 34,
-                        borderRadius: 9999,
-                        display: "grid",
-                        placeItems: "center",
-                        background:
-                          "radial-gradient(circle at 30% 30%, rgba(96,165,250,0.16), rgba(59,130,246,0.07) 55%, rgba(0,0,0,0) 72%)",
-                        boxShadow: "0 0 26px rgba(59,130,246,0.10)",
-                      }}
-                    >
-                      {FEATURE_ICONS[i]}
-                    </div>
-                  </div>
-                  <div>
-                    <h3
-                      style={{
-                        fontSize: 18,
-                        fontWeight: 800,
-                        color: "#ffffff",
-                        letterSpacing: "-0.03em",
-                        margin: "0 0 8px",
-                      }}
-                    >
-                      {feat.title}
-                    </h3>
-                    <p style={{ fontSize: 15, lineHeight: 1.7, color: "#b6b6b6", margin: 0 }}>
-                      {feat.description}
-                    </p>
-                  </div>
-                </div>
-              </FadeUp>
-            ))}
+        <div className="relative mt-4">
+          <div className="flex justify-between text-sm font-bold">
+            <span style={{ color: GREEN }}>Over</span>
+            <span className="text-white">Under</span>
+          </div>
+          <div className="mt-1.5 flex h-2 gap-1">
+            <span className="h-full rounded-full" style={{ width: "67%", background: GREEN }} />
+            <span className="h-full flex-1 rounded-full bg-white/15" />
+          </div>
+          <div className="mt-1.5 flex justify-between font-heading text-xl font-extrabold">
+            <span style={{ color: GREEN }}>67%</span>
+            <span className="text-white">33%</span>
           </div>
         </div>
+        <p className="relative mt-3 text-[13px] leading-snug text-white/60">
+          Our model gives this 67%, the bookmakers 56%. A clear gap with plenty of data behind it: 1u.
+        </p>
       </div>
-    </section>
+    </div>
   );
 }
 
-function SLValueProps() {
-  const t = S.valueProps;
+function PickSection() {
+  const t = S.pick;
   return (
-    <section style={{ padding: "100px 24px", background: "#010101" }}>
-      <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-        <FadeUp className="text-center">
-          <h2
-            style={{
-              fontSize: "clamp(26px, 4vw, 46px)",
-              fontWeight: 800,
-              letterSpacing: "-0.04em",
-              color: "#ffffff",
-              maxWidth: 700,
-              margin: "0 auto 56px",
-            }}
-          >
-            {t.headingPart1}{" "}
-            <span style={{ color: SPORTLENS_ACCENT }}>{t.headingAccent}</span>
-          </h2>
-        </FadeUp>
-        <div style={{ maxWidth: 980, margin: "0 auto" }}>
-          <div className="grid grid-cols-1 gap-14 md:grid-cols-3 md:gap-16">
-            {t.items.map((vp, i) => (
-              <FadeUp key={vp.label} delay={i * 0.08}>
-                <div style={{ textAlign: "left" }}>
-                  <div
-                    style={{
-                      fontSize: 64,
-                      fontWeight: 900,
-                      letterSpacing: "-0.08em",
-                      lineHeight: 0.98,
-                      color: "#ffffff",
-                      marginBottom: 10,
-                    }}
-                  >
-                    {vp.stat}
-                  </div>
-                  <div
-                    style={{
-                      fontSize: 16,
-                      fontWeight: 800,
-                      letterSpacing: "-0.02em",
-                      color: "#ffffff",
-                      marginBottom: 10,
-                      display: "flex",
-                      alignItems: "center",
-                      gap: 10,
-                    }}
-                  >
-                    <span
-                      aria-hidden
-                      style={{
-                        width: 18,
-                        height: 2,
-                        borderRadius: 9999,
-                        background: "rgba(59,130,246,0.9)",
-                        flexShrink: 0,
-                      }}
-                    />
-                    <span style={{ color: "rgba(147,197,253,0.92)" }}>{vp.label}</span>
-                  </div>
-                  <p style={{ fontSize: 15, lineHeight: 1.75, color: "#b6b6b6", margin: 0, maxWidth: 360 }}>
-                    {vp.description}
-                  </p>
-                </div>
-              </FadeUp>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function SLDownloadCTA() {
-  const t = S.cta;
-  const lite = useTradeLensMotionLite();
-  return (
-    <section
-      style={{
-        position: "relative",
-        overflow: "hidden",
-        padding: "120px 24px",
-        textAlign: "center",
-        background: "#010101",
-      }}
-    >
-      {lite ? (
-        <div
-          style={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            width: "min(100vw, 640px)",
-            height: 420,
-            borderRadius: "50%",
-            background:
-              "radial-gradient(ellipse, rgba(59,130,246,0.12) 0%, rgba(29,78,216,0.06) 45%, transparent 72%)",
-            pointerEvents: "none",
-          }}
-        />
-      ) : (
-        <>
-          <div
-            style={{
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              width: 700,
-              height: 500,
-              borderRadius: "50%",
-              background:
-                "radial-gradient(ellipse, rgba(59,130,246,0.2) 0%, rgba(29,78,216,0.1) 40%, transparent 70%)",
-              filter: "blur(80px)",
-              pointerEvents: "none",
-            }}
-          />
-          <motion.div
-            animate={{ scale: [1, 1.08, 1] }}
-            transition={{ duration: 8, ease: "easeInOut", repeat: Infinity }}
-            style={{
-              position: "absolute",
-              top: "30%",
-              left: "20%",
-              width: 200,
-              height: 200,
-              borderRadius: "50%",
-              background: "radial-gradient(circle, rgba(99,102,241,0.12) 0%, transparent 70%)",
-              filter: "blur(30px)",
-              pointerEvents: "none",
-            }}
-          />
-        </>
-      )}
-      <div style={{ position: "relative", zIndex: 1, maxWidth: 700, margin: "0 auto" }}>
-        <FadeUp>
-          <div
-            style={{
-              fontSize: "clamp(14px, 2.5vw, 18px)",
-              fontWeight: 700,
-              color: SPORTLENS_ACCENT,
-              letterSpacing: "-0.01em",
-              marginBottom: 20,
-            }}
-          >
-            {t.eyebrow}
-          </div>
-        </FadeUp>
-        <FadeUp delay={0.1}>
-          <h2
-            style={{
-              fontSize: "clamp(30px, 5vw, 58px)",
-              fontWeight: 800,
-              letterSpacing: "-0.05em",
-              lineHeight: 1.05,
-              color: "#ffffff",
-              margin: "0 0 20px",
-            }}
-          >
-            {t.heading}
-          </h2>
-        </FadeUp>
-        <FadeUp delay={0.2}>
-          <p style={{ fontSize: 18, color: "#b6b6b6", lineHeight: 1.65, margin: "0 auto 44px", maxWidth: 520 }}>
-            {t.sub}
-          </p>
-        </FadeUp>
-        <FadeUp delay={0.3}>
-          <div style={{ display: "flex", justifyContent: "center" }}>
-            <div className="md:hidden">
-              <AppStoreBadge />
-            </div>
-            <div className="hidden md:block">
-              <AppStoreBadge large />
-            </div>
-          </div>
-        </FadeUp>
-      </div>
-    </section>
-  );
-}
-
-function SLResponsible() {
-  const t = S.responsible;
-  return (
-    <section
-      id="responsible-gambling"
-      style={{
-        padding: "100px 24px",
-        background: "#0a0a0a",
-        borderTop: "1px solid rgba(255,255,255,0.06)",
-      }}
-    >
-      <div style={{ maxWidth: 980, margin: "0 auto" }}>
-        <div className="grid grid-cols-1 items-start gap-12 md:grid-cols-2 md:gap-20">
-          <FadeUp>
-            <span
-              style={{
-                display: "inline-block",
-                fontSize: 12,
-                fontWeight: 700,
-                color: SPORTLENS_ACCENT,
-                letterSpacing: "0.12em",
-                textTransform: "uppercase",
-                marginBottom: 16,
-              }}
-            >
-              {t.eyebrow}
+    <section id="picks" className="scroll-mt-20 px-5 py-24 sm:py-32">
+      <div className="mx-auto grid max-w-6xl items-center gap-14 md:grid-cols-2">
+        <Reveal className="order-2 md:order-1">
+          <div className="relative mx-auto max-w-[400px]">
+            <span className="absolute -top-7 left-1 font-mono text-[10px] uppercase tracking-[0.2em] text-white/35">
+              {t.example}
             </span>
-            <h2
-              style={{
-                fontSize: "clamp(28px, 4vw, 48px)",
-                fontWeight: 800,
-                letterSpacing: "-0.04em",
-                lineHeight: 1.05,
-                color: "#ffffff",
-                margin: "0 0 20px",
-              }}
-            >
-              {t.heading}
-            </h2>
-            <p style={{ fontSize: 16, lineHeight: 1.75, color: "#b6b6b6", margin: 0, maxWidth: 420 }}>
-              {t.body}
-            </p>
-          </FadeUp>
-
-          <ol style={{ listStyle: "none", margin: 0, padding: 0 }}>
-            {t.principles.map((item, i) => (
-              <FadeUp key={item.title} delay={i * 0.08}>
-                <li
-                  style={{
-                    display: "grid",
-                    gridTemplateColumns: "44px 1fr",
-                    gap: 12,
-                    padding: "24px 0",
-                    borderTop: i === 0 ? "none" : "1px solid rgba(255,255,255,0.08)",
-                    paddingTop: i === 0 ? 4 : 24,
-                  }}
-                >
+            <PickCard />
+          </div>
+        </Reveal>
+        <div className="order-1 md:order-2">
+          <Reveal>
+            <Eyebrow>{t.eyebrow}</Eyebrow>
+            <h2 className="font-heading text-4xl font-extrabold tracking-[-0.04em] text-white sm:text-5xl">{t.heading}</h2>
+            <p className="mt-5 max-w-md text-[16px] leading-relaxed text-white/55">{t.sub}</p>
+          </Reveal>
+          <ol className="mt-10 space-y-6">
+            {t.callouts.map((c, i) => (
+              <Reveal key={c.title} delay={0.08 * i}>
+                <li className="flex gap-4">
                   <span
-                    aria-hidden
-                    style={{
-                      fontSize: 13,
-                      fontWeight: 800,
-                      letterSpacing: "0.12em",
-                      color: "#93c5fd",
-                      paddingTop: 4,
-                    }}
+                    className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-lg font-mono text-xs font-medium"
+                    style={{ background: "rgba(59,130,246,0.12)", color: SPORTLENS_ACCENT }}
                   >
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <div>
-                    <h3
-                      style={{
-                        fontSize: 18,
-                        fontWeight: 800,
-                        color: "#ffffff",
-                        letterSpacing: "-0.03em",
-                        margin: "0 0 6px",
-                      }}
-                    >
-                      {item.title}
-                    </h3>
-                    <p style={{ fontSize: 15, lineHeight: 1.7, color: "#b6b6b6", margin: 0 }}>
-                      {item.description}
-                    </p>
+                    <p className="font-semibold text-white">{c.title}</p>
+                    <p className="mt-1 text-sm leading-relaxed text-white/50">{c.body}</p>
                   </div>
                 </li>
-              </FadeUp>
+              </Reveal>
             ))}
           </ol>
         </div>
-
-        <FadeUp>
-          <div
-            style={{
-              marginTop: 72,
-              paddingTop: 40,
-              borderTop: "1px solid rgba(255,255,255,0.08)",
-            }}
-          >
-            <h3
-              style={{
-                fontSize: 18,
-                fontWeight: 800,
-                color: "#ffffff",
-                letterSpacing: "-0.03em",
-                margin: "0 0 6px",
-              }}
-            >
-              {t.helpHeading}
-            </h3>
-            <p style={{ fontSize: 15, lineHeight: 1.7, color: "#b6b6b6", margin: 0 }}>
-              {t.helpBody}
-            </p>
-            <ul
-              className="grid grid-cols-2 gap-x-8 gap-y-6 md:grid-cols-3"
-              style={{ listStyle: "none", margin: "28px 0 0", padding: 0 }}
-            >
-              {t.help.map((h) => (
-                <li key={h.country}>
-                  <a
-                    href={h.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group block no-underline"
-                  >
-                    <span
-                      className="block"
-                      style={{
-                        fontSize: 11,
-                        fontWeight: 700,
-                        color: "#7f7f7f",
-                        letterSpacing: "0.1em",
-                        textTransform: "uppercase",
-                        marginBottom: 4,
-                      }}
-                    >
-                      {h.country}
-                    </span>
-                    <span className="inline-flex items-center gap-1.5 text-[15px] font-semibold text-[#e5e5e5] transition-colors group-hover:text-white">
-                      {h.name}
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden style={{ opacity: 0.5 }}>
-                        <path d="M7 17 17 7" />
-                        <path d="M7 7h10v10" />
-                      </svg>
-                    </span>
-                  </a>
-                </li>
-              ))}
-            </ul>
-            <p style={{ fontSize: 12, lineHeight: 1.6, color: "#7f7f7f", margin: "40px 0 0" }}>
-              {t.disclaimer}
-            </p>
-          </div>
-        </FadeUp>
       </div>
     </section>
   );
 }
 
-function SocialButton({
-  href,
-  label,
-  children,
-}: {
-  href: string;
-  label: string;
-  children: ReactNode;
-}) {
-  const lite = useTradeLensMotionLite();
+function ScoutSection() {
+  const t = S.scout;
   return (
-    <motion.a
-      href={href}
-      target={href.startsWith("mailto:") ? undefined : "_blank"}
-      rel={href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
-      aria-label={label}
-      whileHover={lite ? undefined : { scale: 1.1 }}
-      whileTap={{ scale: 0.95 }}
-      style={{
-        width: 44,
-        height: 44,
-        borderRadius: 9999,
-        background: "rgba(255,255,255,0.05)",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        color: "#b6b6b6",
-        textDecoration: "none",
-      }}
-    >
-      {children}
-    </motion.a>
+    <section id="scout" className="relative scroll-mt-20 overflow-hidden bg-black px-5 py-24 sm:py-32">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -left-40 top-1/3 h-[420px] w-[420px] rounded-full blur-3xl"
+        style={{ background: "radial-gradient(closest-side, rgba(59,130,246,0.14), transparent)" }}
+      />
+      <div className="relative mx-auto grid max-w-6xl items-center gap-14 md:grid-cols-[1fr_0.8fr]">
+        <Reveal>
+          <Eyebrow>{t.eyebrow}</Eyebrow>
+          <h2 className="font-heading text-4xl font-extrabold tracking-[-0.04em] text-white sm:text-5xl">{t.heading}</h2>
+          <p className="mt-5 max-w-lg text-[16px] leading-relaxed text-white/55">{t.sub}</p>
+          <ul className="mt-8 space-y-3">
+            {t.bullets.map((b) => (
+              <li key={b} className="flex items-center gap-3 text-[15px] text-white/80">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke={GREEN} strokeWidth="2.4" aria-hidden>
+                  <path d="M5 12.5l4.5 4.5L19 7.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+                {b}
+              </li>
+            ))}
+          </ul>
+        </Reveal>
+        <Reveal delay={0.12} className="mx-auto w-full max-w-[340px]">
+          <PhoneVideo src={`${MEDIA}/scout.mp4`} poster={`${MEDIA}/scout-poster.jpg`} className="w-full" />
+        </Reveal>
+      </div>
+    </section>
   );
 }
 
-function SLFooter() {
+function Numbers() {
+  return (
+    <section className="border-y border-white/[0.06] px-5">
+      <div className="mx-auto grid max-w-6xl grid-cols-2 md:grid-cols-4">
+        {S.numbers.map((n, i) => (
+          <Reveal
+            key={n.label}
+            delay={0.06 * i}
+            className={`py-10 ${i % 2 ? "pl-6 md:pl-8" : "pr-6 md:pr-8"} ${i ? "md:border-l md:border-white/[0.06] md:pl-8" : ""} ${
+              i > 1 ? "border-t border-white/[0.06] md:border-t-0" : ""
+            } ${i === 1 ? "border-l border-white/[0.06]" : ""} ${i === 3 ? "border-l border-white/[0.06]" : ""}`}
+          >
+            <p className="font-heading text-4xl font-extrabold tracking-[-0.04em] text-white sm:text-5xl">{n.stat}</p>
+            <p className="mt-2 max-w-[180px] text-sm leading-snug text-white/50">{n.label}</p>
+          </Reveal>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function Bento() {
+  const t = S.bento;
+  const tile = "rounded-3xl border border-white/[0.07] bg-[#0b0b0b] p-6";
+  return (
+    <section className="px-5 py-24 sm:py-32">
+      <div className="mx-auto max-w-6xl">
+        <Reveal>
+          <h2 className="max-w-xl font-heading text-4xl font-extrabold tracking-[-0.04em] text-white sm:text-5xl">{t.heading}</h2>
+        </Reveal>
+        <div className="mt-12 grid gap-4 md:grid-cols-3">
+          <Reveal className={`${tile} relative overflow-hidden md:col-span-2 md:grid md:grid-cols-2 md:items-center md:gap-8`}>
+            <div>
+              <p className="text-lg font-semibold text-white">{t.tiles.props.title}</p>
+              <p className="mt-2 text-sm leading-relaxed text-white/50">{t.tiles.props.body}</p>
+            </div>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={`${MEDIA}/chart.jpg`}
+              alt="SportLens points projection chart"
+              className="mx-auto mt-6 w-full max-w-[340px] rounded-[18px] md:mt-0"
+              loading="lazy"
+            />
+          </Reveal>
+          <Reveal delay={0.05} className={`${tile} flex flex-col`}>
+            <p className="text-lg font-semibold text-white">{t.tiles.odds.title}</p>
+            <p className="mt-2 text-sm text-white/50">{t.tiles.odds.body}</p>
+            <div className="mt-auto flex flex-col gap-2 pt-6">
+              {["2.50", "6/4", "+150"].map((o, i) => (
+                <span
+                  key={o}
+                  className="rounded-2xl border px-5 py-2.5 font-heading text-2xl font-extrabold tracking-[-0.03em]"
+                  style={{
+                    borderColor: i === 0 ? "rgba(59,130,246,0.5)" : "rgba(255,255,255,0.08)",
+                    color: i === 0 ? SPORTLENS_ACCENT : "#fff",
+                  }}
+                >
+                  {o}
+                </span>
+              ))}
+            </div>
+          </Reveal>
+          <Reveal delay={0.1} className={tile}>
+            <p className="font-heading text-3xl font-extrabold tracking-[-0.03em] text-white">EN · DE · FR</p>
+            <p className="font-heading text-3xl font-extrabold tracking-[-0.03em] text-white/30">ES · IT · PT</p>
+            <p className="mt-4 text-lg font-semibold text-white">{t.tiles.languages.title}</p>
+            <p className="mt-1 text-sm leading-relaxed text-white/50">{t.tiles.languages.body}</p>
+          </Reveal>
+          <Reveal delay={0.15} className={tile}>
+            <p className="font-heading text-3xl font-extrabold tracking-[-0.03em] text-white">20:30</p>
+            <p className="font-heading text-3xl font-extrabold tracking-[-0.03em] text-white/30">8:30 PM</p>
+            <p className="mt-4 text-lg font-semibold text-white">{t.tiles.times.title}</p>
+            <p className="mt-1 text-sm leading-relaxed text-white/50">{t.tiles.times.body}</p>
+          </Reveal>
+          <Reveal delay={0.2} className={tile}>
+            <svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke={GREEN} strokeWidth="1.8" aria-hidden>
+              <path d="M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6z" strokeLinejoin="round" />
+              <path d="M9 12l2 2 4-4" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+            <p className="mt-5 text-lg font-semibold text-white">{t.tiles.private.title}</p>
+            <p className="mt-1 text-sm leading-relaxed text-white/50">{t.tiles.private.body}</p>
+          </Reveal>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Responsible() {
+  const t = S.responsible;
+  return (
+    <section id="play-safe" className="scroll-mt-20 px-5 pb-24 sm:pb-32">
+      <div className="mx-auto max-w-6xl rounded-[32px] border border-white/[0.07] bg-[#080808] p-7 sm:p-12">
+        <div className="grid gap-8">
+          <Reveal className="max-w-2xl">
+            <Eyebrow>{t.eyebrow}</Eyebrow>
+            <h2 className="font-heading text-3xl font-extrabold tracking-[-0.04em] text-white sm:text-4xl">{t.heading}</h2>
+            <p className="mt-4 text-[15px] leading-relaxed text-white/55">{t.body}</p>
+          </Reveal>
+          <div className="grid gap-4 sm:grid-cols-3">
+            {t.principles.map((p, i) => (
+              <Reveal key={p.title} delay={0.06 * i} className="rounded-2xl bg-white/[0.03] p-5">
+                <p className="whitespace-nowrap font-semibold text-white">{p.title}</p>
+                <p className="mt-2 text-sm leading-relaxed text-white/50">{p.description}</p>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+        <div className="mt-10 border-t border-white/[0.07] pt-8">
+          <p className="font-semibold text-white">{t.helpHeading}</p>
+          <p className="mt-1 text-sm text-white/50">{t.helpBody}</p>
+          <div className="mt-5 grid grid-cols-2 gap-x-6 gap-y-4 sm:grid-cols-3">
+            {t.help.map((h) => (
+              <a key={h.name} href={h.url} target="_blank" rel="noopener noreferrer" className="group">
+                <p className="text-[10px] font-medium uppercase tracking-[0.14em] text-white/35">{h.country}</p>
+                <p className="text-sm text-white/80 transition-colors group-hover:text-white">{h.name} ↗</p>
+              </a>
+            ))}
+          </div>
+          <p className="mt-8 text-xs text-white/35">{t.disclaimer}</p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function FinalCta() {
+  const t = S.cta;
+  return (
+    <section className="relative overflow-hidden px-5 pb-28 text-center">
+      <Reveal>
+        <div className="relative mx-auto w-fit">
+          <div
+            aria-hidden
+            className="absolute inset-0 scale-150 rounded-full blur-3xl"
+            style={{ background: "radial-gradient(closest-side, rgba(59,130,246,0.35), transparent)" }}
+          />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={`${MEDIA}/app-icon.png`}
+            alt="SportLens app icon"
+            width={112}
+            height={112}
+            className="relative rounded-[26px] shadow-[0_20px_60px_rgba(0,0,0,0.6)]"
+          />
+        </div>
+        <h2 className="mx-auto mt-10 max-w-2xl font-heading text-4xl font-extrabold tracking-[-0.04em] text-white sm:text-6xl">
+          {t.heading}
+        </h2>
+        <p className="mt-4 text-white/50">{t.sub}</p>
+        <div className="mt-8 flex justify-center">
+          <AppStoreBadge large />
+        </div>
+      </Reveal>
+    </section>
+  );
+}
+
+function Footer() {
   const t = S.footer;
   const year = new Date().getFullYear();
   return (
-    <footer
-      style={{
-        background: "#010101",
-        borderTop: "1px solid rgba(255,255,255,0.08)",
-        padding: "72px 24px 0",
-      }}
-      role="contentinfo"
-    >
-      <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-4 md:gap-8">
+    <footer className="border-t border-white/[0.06] px-5 py-12">
+      <div className="mx-auto flex max-w-6xl flex-col gap-10 md:flex-row md:items-start md:justify-between">
+        <div>
+          <SportLensWordmark size={18} />
+          <p className="mt-3 text-sm text-white/45">{t.tagline}</p>
+        </div>
+        <div className="flex gap-16">
           <div>
-            <div style={{ display: "flex", alignItems: "center", height: 32, marginBottom: 14 }}>
-              <SportLensWordmark size={16} />
-            </div>
-            <p style={{ fontSize: 13, color: "#7f7f7f", lineHeight: 1.65, margin: 0, maxWidth: 200 }}>
-              {t.tagline}
-            </p>
+            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/35">{t.legalHeading}</p>
+            <ul className="mt-3 space-y-2 text-sm">
+              <li>
+                <Link href="/sportlens/privacy" className="text-white/70 hover:text-white">
+                  {t.privacyPolicy}
+                </Link>
+              </li>
+              <li>
+                <Link href="/sportlens/terms" className="text-white/70 hover:text-white">
+                  {t.termsOfUse}
+                </Link>
+              </li>
+            </ul>
           </div>
           <div>
-            <p
-              style={{
-                fontSize: 13,
-                fontWeight: 700,
-                color: "#7f7f7f",
-                letterSpacing: "0.1em",
-                textTransform: "uppercase",
-                marginBottom: 20,
-              }}
-            >
-              {t.connectHeading}
-            </p>
-            <div style={{ display: "flex", gap: 12 }}>
-              <SocialButton href={`mailto:${SUPPORT_EMAIL}`} label={t.ariaEmail}>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-                  <polyline points="22,6 12,13 2,6" />
-                </svg>
-              </SocialButton>
-            </div>
-          </div>
-          <div>
-            <p
-              style={{
-                fontSize: 13,
-                fontWeight: 700,
-                color: "#7f7f7f",
-                letterSpacing: "0.1em",
-                textTransform: "uppercase",
-                marginBottom: 16,
-              }}
-            >
-              {t.legalHeading}
-            </p>
-            <nav aria-label={t.ariaLegal} style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-              <Link href="/sportlens/privacy" className="text-sm text-[#b6b6b6] no-underline transition-colors hover:text-white">
-                {t.privacyPolicy}
-              </Link>
-              <Link href="/sportlens/terms" className="text-sm text-[#b6b6b6] no-underline transition-colors hover:text-white">
-                {t.termsOfUse}
-              </Link>
-            </nav>
-          </div>
-          <div>
-            <p
-              style={{
-                fontSize: 13,
-                fontWeight: 700,
-                color: "#7f7f7f",
-                letterSpacing: "0.1em",
-                textTransform: "uppercase",
-                marginBottom: 16,
-              }}
-            >
-              {t.contactHeading}
-            </p>
-            <a href={`mailto:${SUPPORT_EMAIL}`} className="text-sm text-[#b6b6b6] no-underline transition-colors hover:text-white">
+            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/35">{t.contactHeading}</p>
+            <a href={`mailto:${SUPPORT_EMAIL}`} aria-label={t.ariaEmail} className="mt-3 block text-sm text-white/70 hover:text-white">
               {SUPPORT_EMAIL}
             </a>
           </div>
         </div>
-        <div
-          style={{
-            marginTop: 64,
-            paddingTop: 24,
-            paddingBottom: 32,
-            borderTop: "1px solid rgba(255,255,255,0.06)",
-            textAlign: "center",
-            fontSize: 13,
-            color: "#7f7f7f",
-          }}
-        >
-          <Link href="/" className="text-[#7f7f7f] no-underline transition-colors hover:text-white">
-            {t.copyright(year)}
-          </Link>
-        </div>
       </div>
+      <p className="mx-auto mt-12 max-w-6xl text-xs text-white/30">{t.copyright(year)}</p>
     </footer>
   );
 }
 
 export function SportLensPage() {
-  const motionLite = useTradeLensMotionLiteFlag();
-
-  useEffect(() => {
-    const hash = window.location.hash.replace(/^#/, "");
-    if (!hash) return;
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const id = requestAnimationFrame(() => {
-      scrollToTradeLensSection(hash, reduce ? "auto" : "smooth");
-    });
-    return () => cancelAnimationFrame(id);
-  }, []);
-
   return (
-    <TradeLensMotionLiteContext.Provider value={motionLite}>
-      <div
-        style={{
-          fontFamily: "var(--font-jakarta), 'Plus Jakarta Sans', system-ui, sans-serif",
-          background: "#010101",
-          color: "#ffffff",
-          minHeight: "100vh",
-          overflowX: "hidden",
-          position: "relative",
-        }}
-      >
-        <div
-          aria-hidden
-          style={{
-            position: "absolute",
-            inset: 0,
-            pointerEvents: "none",
-            zIndex: 0,
-            background:
-              "radial-gradient(900px 600px at 12% 16%, rgba(59,130,246,0.10) 0%, rgba(0,0,0,0) 60%), radial-gradient(700px 480px at 88% 28%, rgba(99,102,241,0.08) 0%, rgba(0,0,0,0) 58%), radial-gradient(900px 520px at 50% 92%, rgba(52,211,153,0.05) 0%, rgba(0,0,0,0) 60%)",
-            opacity: motionLite ? 0.55 : 0.8,
-          }}
-        />
-        <SLNav />
-        <main style={{ position: "relative", zIndex: 1 }}>
-          <SLHero />
-          <SLHowItWorks />
-          <SLFeatures />
-          <SLValueProps />
-          <SLDownloadCTA />
-          <SLResponsible />
-        </main>
-        <SLFooter />
-      </div>
-    </TradeLensMotionLiteContext.Provider>
+    <main className="min-h-screen bg-black font-sans text-white antialiased [scroll-behavior:smooth]">
+      <Nav />
+      <Hero />
+      <SportsBand />
+      <PickSection />
+      <ScoutSection />
+      <Numbers />
+      <Bento />
+      <Responsible />
+      <FinalCta />
+      <Footer />
+    </main>
   );
 }

@@ -11,10 +11,33 @@ export {
 export const SPORTLENS_ACCENT = "#3B82F6";
 
 /** "Sport" in white, "Lens" in the app's blue, as on the app's home screen. */
-export function SportLensWordmark({ size = 17 }: { size?: number }) {
+/** The app's wordmark: Oxanium, slanted, "Lens" in blue, next to the app icon. */
+export function SportLensWordmark({ size = 17, icon = true }: { size?: number; icon?: boolean }) {
   return (
-    <span style={{ fontSize: size, fontWeight: 800, color: "#fff", letterSpacing: "-0.03em" }}>
-      Sport<span style={{ color: SPORTLENS_ACCENT }}>Lens</span>
+    <span style={{ display: "inline-flex", alignItems: "center", gap: Math.round(size * 0.5) }}>
+      {icon ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src="/sportlens/app-icon.png"
+          alt=""
+          width={Math.round(size * 1.65)}
+          height={Math.round(size * 1.65)}
+          style={{ borderRadius: Math.round(size * 0.4), display: "block" }}
+        />
+      ) : null}
+      <span
+        style={{
+          fontFamily: "var(--font-oxanium), ui-sans-serif, system-ui, sans-serif",
+          fontSize: size,
+          fontWeight: 800,
+          color: "#fff",
+          letterSpacing: "0.01em",
+          display: "inline-block",
+          transform: "skewX(-12deg)",
+        }}
+      >
+        Sport<span style={{ color: SPORTLENS_ACCENT }}>Lens</span>
+      </span>
     </span>
   );
 }

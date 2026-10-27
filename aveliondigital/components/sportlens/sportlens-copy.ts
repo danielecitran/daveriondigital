@@ -1,99 +1,81 @@
 export const S = {
   nav: {
-    howItWorks: "How it works",
-    features: "Features",
+    picks: "Picks",
+    scout: "Scout",
+    sports: "Sports",
+    responsible: "Play safe",
     ariaLabel: "Main navigation",
     ariaHome: "SportLens – Back to the SportLens page",
   },
   hero: {
-    headlineL1: "Professional AI",
-    headlineL2: "Betting Analysis in",
-    headlineAccent: "Seconds.",
-    sub: "Get win chances, fair odds and clear picks for every game, compared against 30+ bookmakers, with an AI mentor that explains every bet.",
+    headlineL1: "Know which bets",
+    headlineL2: "are worth taking.",
+    sub: "SportLens prices every game with its own model, checks it against 30+ bookmakers and tells you plainly when a bet is worth it, and when it isn't.",
   },
-  howItWorks: {
-    eyebrow: "3 simple steps",
-    heading: "How it works",
-    steps: [
+  sportsBand: {
+    label: "One model, every sport you follow",
+    sports: ["Football", "NBA", "NFL", "NHL", "MLB", "Tennis", "MMA"],
+  },
+  pick: {
+    eyebrow: "Inside a pick",
+    heading: "Every pick shows its working.",
+    sub: "No mystery tips. You see what our model expects, what the bookmakers expect, and how much the gap is worth.",
+    example: "Example",
+    callouts: [
       {
-        title: "Pick your sports",
-        description:
-          "Choose the leagues you follow, how you read odds and how much detail you want from Scout.",
+        title: "Our number against theirs",
+        body: "The model gives this bet 67%. The bookmakers' average says 56%. That gap is the edge.",
       },
       {
-        title: "We price every game",
-        description:
-          "Our own model, sharpened by AI, weighs seasons of results against the prices of 30+ bookmakers.",
+        title: "How much to stake",
+        body: "Strong picks get 1 unit, smaller edges half a unit. When there is no real edge, SportLens says so.",
       },
       {
-        title: "See what's worth betting",
-        description:
-          "Every pick is graded, shows how much to stake and comes with the numbers behind it. Ask Scout if anything is unclear.",
+        title: "The reason in one line",
+        body: "Every card says why in plain words, and Scout explains the rest if you ask.",
       },
     ],
   },
-  features: {
-    eyebrow: "Features",
-    heading: "What SportLens can do",
-    subtitle: "Everything you need to bet with a plan, all in one app.",
-    items: [
-      {
-        title: "Win Chances and Fair Odds",
-        description:
-          "For every game across the NBA, NFL, NHL, MLB and top European football: our model's win chance and the fair price it implies.",
-      },
-      {
-        title: "Our Model vs. the Bookmakers",
-        description:
-          "Every price is compared with the average of 30+ bookmakers, so you see at a glance where the odds pay more than they should.",
-      },
-      {
-        title: "Clear Picks and Stake Sizes",
-        description:
-          "Picks are graded Best bet, Value or Longshot, with how much of your bankroll to stake. When there is no edge, SportLens says so.",
-      },
-      {
-        title: "Player Props and Corners",
-        description:
-          "Projected from real game logs, minutes and the opponent, then checked against every bookmaker's line.",
-      },
-      {
-        title: "Scout, Your Betting Mentor",
-        description:
-          "Ask about any game or pick and get a clear answer in seconds, explained at your level, from casual fan to data nerd.",
-      },
-      {
-        title: "Your Odds, Your Language",
-        description:
-          "Decimal, fractional or American odds, kickoff times in your time zone, and the whole app in six languages.",
-      },
+  scout: {
+    eyebrow: "Scout",
+    heading: "A betting mentor that talks your language.",
+    sub: "Ask about any game, prop or price and get a straight answer in seconds. Scout explains at your level, from casual fan to data nerd.",
+    bullets: [
+      "Answers from the same numbers you see in the app",
+      "Says so when a bet has no edge",
+      "Available in six languages",
     ],
   },
-  valueProps: {
-    headingPart1: "What takes hours of research,",
-    headingAccent: "SportLens shows you at a glance.",
-    items: [
-      {
-        stat: "30+",
-        label: "bookmakers",
-        description: "Compared on every game we price",
+  numbers: [
+    { stat: "75,000+", label: "past games behind the model" },
+    { stat: "30+", label: "bookmakers averaged on every game" },
+    { stat: "7", label: "sports, from the Premier League to the UFC" },
+    { stat: "0", label: "ads or trackers in the app" },
+  ],
+  bento: {
+    heading: "Built around how you bet.",
+    tiles: {
+      props: {
+        title: "Player props from real game logs",
+        body: "Minutes, recent form and the opponent, projected and checked against every bookmaker's line.",
       },
-      {
-        stat: "24/7",
-        label: "Scout",
-        description: "Your AI betting mentor is always there for you",
+      odds: {
+        title: "Your odds format",
+        body: "Decimal, fractional or American.",
       },
-      {
-        stat: "0",
-        label: "ads or trackers",
-        description: "No account needed, and your chats stay on your phone",
+      languages: {
+        title: "Six languages",
+        body: "English, Deutsch, Français, Español, Italiano, Português.",
       },
-    ],
-  },
-  cta: {
-    eyebrow: "Coming soon to the App Store",
-    heading: "Find the value bets with SportLens",
-    sub: "Less guessing, more confidence on every bet.",
+      times: {
+        title: "Kickoffs in your time",
+        body: "Every game in your own time zone, in 12 or 24 hours.",
+      },
+      private: {
+        title: "No account needed",
+        body: "Your settings and Scout chats stay on your phone.",
+      },
+    },
   },
   responsible: {
     eyebrow: "18+ · Responsible gambling",
@@ -102,8 +84,7 @@ export const S = {
     principles: [
       {
         title: "Set a budget first",
-        description:
-          "Decide before you start how much you can afford to lose, and stop when it's gone.",
+        description: "Decide before you start how much you can afford to lose, and stop when it's gone.",
       },
       {
         title: "Never chase losses",
@@ -112,8 +93,7 @@ export const S = {
       },
       {
         title: "Take a break",
-        description:
-          "If betting stops being fun or starts to feel like pressure, step away and talk to someone.",
+        description: "If betting stops being fun or starts to feel like pressure, step away and talk to someone.",
       },
     ],
     helpHeading: "Free, confidential help",
@@ -129,19 +109,23 @@ export const S = {
     disclaimer:
       "SportLens provides sports analysis and does not accept bets. Not affiliated with any league, club or bookmaker.",
   },
+  cta: {
+    heading: "Your next matchday, with a plan.",
+    sub: "Made for iPhone. 18+ only.",
+  },
   appStore: {
     line1: "Download on the",
+    /** Until the listing is live. */
+    soonLine1: "Coming soon to the",
     line2: "App Store",
   },
   footer: {
-    tagline: "Clear sports analysis. Smarter bets.",
-    connectHeading: "Connect with us",
+    tagline: "Know which bets are worth taking.",
     legalHeading: "Legal",
     privacyPolicy: "Privacy Policy",
     termsOfUse: "Terms of Use",
     contactHeading: "Contact",
     copyright: (year: number) => `© ${year} Daverion Digital`,
     ariaEmail: "Contact SportLens by email",
-    ariaLegal: "Legal links",
   },
 } as const;
