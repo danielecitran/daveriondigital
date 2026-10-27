@@ -27,7 +27,7 @@ export default function SportLensPrivacyPage() {
       eyebrow="Legal"
       pageTitle="Privacy Policy"
       provider="Provided by Daverion Digital"
-      date="Last updated: October 17, 2026"
+      date="Last updated: October 27, 2026"
     >
       <DocSection heading="Introduction">
         This Privacy Policy explains how Daverion Digital KLG processes personal data when you use
@@ -68,15 +68,17 @@ export default function SportLensPrivacyPage() {
 
         <SubSection heading="3.3 Scout">
           When you ask Scout a question, the app sends your message, the recent conversation (up to
-          20 messages), the game you&apos;re asking about, your time-zone offset, your odds format
-          and the app&apos;s language to our server. Our server sends this, together with the game
+          20 messages), the game you&apos;re asking about, your time-zone offset, your odds format,
+          your experience level and the app&apos;s language to our server. Our server sends this, together with the game
           data, to OpenAI to generate the answer. If you use SportLens in a language other than
-          English, OpenAI also translates your question and the answer.
+          English, OpenAI also translates your question and the answer. Before your first question,
+          the app asks for your permission to send your questions to OpenAI. Without it, nothing is
+          sent and Scout stays unused.
           <BulletList
             items={[
               "We do not store your conversations on our server. Your chat history is saved only on your device, and you can delete it in the app.",
               "To prevent abuse, our server keeps your IP address in memory for about a minute to limit how many questions can be sent.",
-              "OpenAI processes the data on our behalf. Under OpenAI's API terms, it is not used to train OpenAI's models and may be kept for up to 30 days for abuse monitoring.",
+              "OpenAI processes the data to generate the answers, under OpenAI's API terms and privacy policy. It may be kept for up to 30 days for abuse monitoring.",
             ]}
           />
           Please don&apos;t enter personal information, such as names, contact details or
@@ -93,7 +95,7 @@ export default function SportLensPrivacyPage() {
 
         <SubSection heading="3.5 Team logos and images">
           Team logos, flags and player photos are loaded directly from third-party servers, mainly
-          ESPN and jsDelivr. When your phone requests an image, these servers receive your IP
+          ESPN, API-Sports and jsDelivr. When your phone requests an image, these servers receive your IP
           address and basic device information, as they would when you visit any website.
         </SubSection>
 
@@ -111,7 +113,8 @@ export default function SportLensPrivacyPage() {
         <br />
         <br />
         Where the GDPR applies, the legal bases are the performance of our contract with you (Art.
-        6(1)(b) GDPR), our legitimate interest in a secure and reliable service (Art. 6(1)(f)
+        6(1)(b) GDPR), your consent for sending Scout questions to OpenAI (Art. 6(1)(a) GDPR),
+        which you can withdraw at any time with effect for the future, our legitimate interest in a secure and reliable service (Art. 6(1)(f)
         GDPR), and compliance with legal obligations (Art. 6(1)(c) GDPR).
       </DocSection>
 
@@ -127,7 +130,7 @@ export default function SportLensPrivacyPage() {
       </DocSection>
 
       <DocSection heading="6. Recipients">
-        We use the following service providers, who process data on our behalf:
+        We use the following service providers:
         <DataTable
           head={["Provider", "Purpose", "Location"]}
           rows={[
@@ -137,7 +140,7 @@ export default function SportLensPrivacyPage() {
           ]}
         />
         Apple (App Store) and Google (Google Play) process payment data as independent controllers
-        under their own privacy policies. ESPN and jsDelivr act independently when serving images.
+        under their own privacy policies. ESPN, API-Sports and jsDelivr act independently when serving images.
         We disclose data to authorities only where we are legally required to.
       </DocSection>
 
